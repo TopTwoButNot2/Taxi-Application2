@@ -1,0 +1,174 @@
+﻿@model TaxiApplication.Data.Driver
+@using TaxiApplication.BusinessLogics
+@{
+    Layout = "~/Views/Shared/_Owner.cshtml";
+    BusinessLogic bl = new BusinessLogic();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        p {
+            text-align: center;
+            font-size: 60px;
+            margin-top: 0px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <title>Create</title>
+</head>
+<body>
+    <p>@Session["date"] @Session["day"] @Session["time"]</p>
+    @using (Html.BeginForm("Create", "Drivers", FormMethod.Post, new { id = "driverSignup" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal modal-content" style="margin-top: 5%; width: 45%; padding-left: 30px; padding-right: 30px; margin-bottom: 50px">
+            <h4>Add Driver</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <label>First Name</label>
+            <input type="text" name="FirstName" class="w3-border w3-padding" required placeholder="enter first name" />
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+            <label>Last Name</label>
+            <input type="text" name="LastName" class="w3-border w3-padding" required placeholder="enter surname" />
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+            <label>Gender</label>
+            <br />
+            <input type="radio" name="Gender" value="Male" /> <span>Male</span>
+            <input type="radio" name="Gender" value="Female" /> <span>Female</span>
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            <br />
+
+            <label>Address</label>
+            <input type="text" name="Address" class="w3-border w3-padding" required placeholder="enter address" />
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+            <label>Phone number</label>
+            <input type="number" name="PhoneNumber" class="w3-border w3-padding" required placeholder="10 digit phone number" />
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+            <label>Email</label>
+            <input type="email" name="Email" class="w3-border w3-padding" required placeholder="example some@gmail.com" />
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+            <label>License Code</label>
+            <input type="number" name="LicenseCode" class="w3-border w3-padding" required placeholder="enter license code" />
+            @Html.ValidationMessageFor(model => model.LicenseCode, "", new { @class = "text-danger" })
+
+            <label>License Expiry Date</label>
+            <br />
+            <input type="datetime-local" name="LicenseExpiryDate" class="w3-border w3-padding" required />
+            @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
+            <br />
+            <label>PDP Expiry Date</label>
+            <br />
+            <input type="datetime-local" name="PDP" class="w3-border w3-padding" required />
+            @Html.ValidationMessageFor(model => model.PDP, "", new { @class = "text-danger" })
+            <br />
+            @*<label>Owner</label>
+                <br />
+                <select name="ownerID" class="w3-border w3-padding">
+                    @{
+                        foreach (var e in bl.Owners())
+                        {
+                            <option value="@e.ownerID">@e.FirstName @e.LastName</option>
+                        }
+                    }
+
+                </select>*@
+
+            <br /><br />
+
+            <span class="w3-left">
+                <a class="w3-button" type="submit" style="margin-top: 5px; background-color: #f0ad4e; color: white" href="~/Drivers/Index"> Back </a>
+            </span>
+
+            <span class="w3-right">
+                @*<button class="btn btn-default" id="quickstart-sign-up" name="signup">Sign Up</button>*@
+                <button class="w3-button" type="submit" style="margin-top: 5px; background-color: #f0ad4e; color: white" onclick="StartReminder()"> Save </button>
+            </span>
+            <br /><br />
+        </div>
+    }
+    <p id="demo"></p>
+
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyDaAoN3G4KexEhCHzLhmCftxvPREdlgkto",
+                authDomain: "taxi-app-sa.firebaseapp.com",
+                databaseURL: "https://taxi-app-sa.firebaseio.com",
+                projectId: "taxi-app-sa",
+                storageBucket: "taxi-app-sa.appspot.com",
+                messagingSenderId: "656805543604",
+                appId: "1:656805543604:web:995f80417dfca3f2"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
+        <script src="~/Scripts/driverSignup.js"></script>
+        @*@Scripts.Render("~/bundles/jqueryval")*@
+    }
+
+    @*<script>
+
+
+            // Set the date we're counting down to
+            var countDownDate = new Date("@Session["date"] @Session["day"], 2019 @Session["time"]").getTime();
+
+        // Update the count down every 1 second
+            var x = setInterval(function() {
+
+                    // Get today's date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Output the result in an element with id="demo"
+                    document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                    // If the count down is over, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+
+                        document.getElementById("demo").innerHTML = "EXPIRED";
+                        $.ajax(
+                            {
+                                type: "POST", //HTTP POST Method
+                                url: "/Drivers/SendMail", // Controller/View
+                                data: { //Passing data
+                                    Subject: "License Expiry" //Reading text box values using Jquery
+                                },
+
+                                success: function() {
+                                    alert('Email Sent')
+                                }
+
+                            });
+                    }
+                },
+                1000);
+        </script>*@
+</body>
+</html>

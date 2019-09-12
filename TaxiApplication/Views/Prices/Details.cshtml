@@ -1,0 +1,35 @@
+﻿@model TaxiApplication.Data.Price
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Price</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pricevalue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pricevalue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PriceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

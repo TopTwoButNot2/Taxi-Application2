@@ -1,0 +1,74 @@
+﻿@model TaxiApplication.Data.NextOfKin
+
+@{
+    Layout = null;
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>NextOfKin</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.passenger.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.passenger.FirstName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

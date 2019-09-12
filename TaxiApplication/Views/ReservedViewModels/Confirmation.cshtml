@@ -1,0 +1,142 @@
+﻿@model IEnumerable<TaxiApplication.Data.ReservedViewModel>
+
+@{
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>Confirmation</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiMake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberLaggagSmall)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberLaggageMed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberLaggageLrg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaggagePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoutePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnerTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiMake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiModel)
+        </td>
+        <td>
+            <img src="@Url.Action("RenderImage", "TaxiMakes", new { id = item.PassengerId})" width="50" height="60" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoadingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepertureTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberLaggagSmall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberLaggageMed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberLaggageLrg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaggagePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PassengerId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PassengerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PassengerId })
+        </td>
+    </tr>
+}
+
+</table>

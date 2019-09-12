@@ -1,0 +1,76 @@
+﻿@model IEnumerable<TaxiApplication.Data.Schedule>
+
+@using TaxiApplication.BusinessLogics
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ScheduleLogics cl = new ScheduleLogics();
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="~/Schedules/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+</p>
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.owner.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.owner.rank.RankName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.route.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDate.DateTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDate.DateFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.owner.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.owner.rank.RankName)
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.route.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDate.DateTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDate.DateFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoadingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepertureTime)
+        </td>
+
+    </tr>
+    }
+
+</table>

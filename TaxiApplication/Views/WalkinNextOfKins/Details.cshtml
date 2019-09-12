@@ -1,0 +1,59 @@
+﻿@model TaxiApplication.Data.WalkinNextOfKin
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WalkinNextOfKin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.walkingPassenger.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.walkingPassenger.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

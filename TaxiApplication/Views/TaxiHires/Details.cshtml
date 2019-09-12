@@ -1,0 +1,105 @@
+﻿@model TaxiApplication.Data.TaxiHire
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+
+}
+
+
+
+<hr />
+<hr />
+<hr />
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <img src="data:image/png;base64,@Convert.ToBase64String(Model.Image, 0, Model.Image.Length)" style="width: 300px; height: 300px" alt="" />
+    </div>
+    <div class="col-md-6 pull-right">
+        <h4>Taxi Hire</h4>
+        <table class="table">
+            <tr>
+                <th @Html.DisplayNameFor(model => model.Fuel.FuelName)</th>
+                <td>
+                    @Html.DisplayFor(model => model.Fuel.FuelName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Insurances.Insurance_Type)</th>
+                <td>
+                    @Html.DisplayFor(model => model.Insurances.Insurance_Type)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Transmission.transName)</th>
+                <td>
+                    @Html.DisplayFor(model => model.Transmission.transName)
+                </td>
+            </tr>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.TaxiMakes.MakeType)</th>
+                <td>
+                    @Html.DisplayFor(model => model.TaxiMakes.MakeType)
+                </td>
+            </tr>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.TaxiModels.TaxiModelName)</th>
+                <th>
+                    @Html.DisplayFor(model => model.TaxiModels.TaxiModelName)
+                </th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Cost_Per_Day)</th>
+                <th>
+                    @Html.DisplayFor(model => model.Cost_Per_Day)
+                </th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.KiloRate)</th>
+                <th>
+                    @Html.DisplayFor(model => model.KiloRate)
+                </th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>
+                    @Html.DisplayFor(model => model.Status)
+                </th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.freeKiloMeters)</th>
+                <th>
+                    @Html.DisplayFor(model => model.freeKiloMeters)
+                </th>
+            </tr>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.CurrentMilage)</th>
+                <th>
+                    @Html.DisplayFor(model => model.CurrentMilage)
+                </th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.numTimesBooked)</th>
+                <th>
+                    @Html.DisplayFor(model => model.numTimesBooked)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <a class="btn btn-default" href="@Url.Action("Index","TaxiHires")">
+                        <i class="fa fa-angle-left"></i>
+                        Back to List
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-default" href="@Url.Action("Edit","TaxiHires", new { id = Model.vehicleID })">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </div>
+   

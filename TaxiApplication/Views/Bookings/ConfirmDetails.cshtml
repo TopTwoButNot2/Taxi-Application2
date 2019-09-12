@@ -1,0 +1,137 @@
+﻿@model TaxiApplication.Data.Booking
+
+@{
+    ViewBag.Title = "ConfirmDetails";
+    var msg = TempData["AlertMessage"] ?? string.Empty;
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg = '@message';
+    if (msg)
+    {
+        alert(msg)
+    }
+
+</script>
+
+
+<br /><br />
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3>Confirm Application</h3>
+    </div>
+    <img src="@Url.Action("RenderImage", "TaxiHires", new { id = Model.vehicleID})" width="300" height="250" />
+    <div class="panel-body" style="height:25em;overflow-y:auto">
+        <h4>Please Confirm Correctness of details.</h4>
+        <table class="table table-bordered table-striped">
+            @*<tr>
+            <td>
+                Client
+            </td>
+
+            <td>
+
+                @Html.DisplayName(Model.getLastName())
+                @Html.DisplayName(Model.getFirstName())
+            </td>
+        </tr>*@
+
+            <tr>
+                <td>
+                    Vehicle
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.taxiH.TaxiMakes.MakeType)
+                    @Html.DisplayFor(m => m.taxiH.TaxiModels.TaxiModelName)
+                    @*@Html.DisplayName(Model.taxiH.getMake())
+                    @Html.DisplayName(Model.taxiH.getModel())*@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Milage
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.taxiH.CurrentMilage) km
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Free KM
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.kiloCost) km
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Basic Cost
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.DayPrice)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Days
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.numOfDays)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Extras
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.ExtraPrice)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  Over Night Fee
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.Booking_Cost)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Deposit
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.deposite)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Route Distance
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => m.RouteDistance)
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Cobfirm and Accept payment", "OnceOff", "Bookings", new { area = "" }, new { @class = "btn btn-block btn-success" })
+
+    @*@Html.ActionLink("Confirm and Accept payment", "ThankYouPage", "Home", new { id = Model.BookingId }, new { @class = "btn btn-success" })*@
+    @*<a href="~/Home/ThankYouPage" class="btn btn-success">Confirm</a>|*@
+    <a href="~/Bookings/Edit/@Model.BookingId" class="btn btn-primary">Edit Details</a>
+</p>

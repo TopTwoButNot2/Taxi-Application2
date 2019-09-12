@@ -1,0 +1,70 @@
+﻿@using TaxiApplication.BusinessLogics
+@{
+    ViewBag.Title = "AddPosition";
+    Logic l = new Logic();
+    BusinessLogic bl = new BusinessLogic();
+    Layout = "~/Views/Shared/_Owner.cshtml";
+
+}
+@using (Html.BeginForm("AddPosition", "TaxiPositions", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <br />
+    <h2>Taxi Position</h2>
+    <div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+        <label>Select Position</label>
+        <select name="position">
+            @{
+
+                foreach (var x in l.schedulList(User.Identity.Name))
+                {
+                    <option value="@x.Position">@x.route.RouteName - @x.Position</option>
+                }
+            }
+        </select>
+
+
+
+        <br />
+        <label>Select Driver</label>
+        @*<select name="DriverId">
+        @{
+            foreach (var x in l.ListDrivers(User.Identity.Name))
+            {
+                <option value="@x.driverID">@x.FirstName</option>
+
+            }
+        }*@
+        <label>Select Rank</label>
+        @Html.DropDownList("driverID", null, htmlAttributes: new { @class = "w3-border w3-padding", style = "width:100%" })
+        @*</select>*@
+        <br />
+        <label>Select Taxi Number</label>
+        <select name="TaxiNo">
+            @*@{
+                foreach (var x in l.TaxiList(User.Identity.Name))
+                {
+                    <option value="@x.TaxiNo">@x.TaxiNo</option>
+
+                }
+            }*@
+        </select>
+        <br />
+        <br />
+
+
+        <span class="w3-left">
+            <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/TaxiPositions/Index"> Back </a>
+        </span>
+
+        <span class="w3-right">
+            <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+        </span>
+
+        <br />
+        <br />
+        <br />
+    </div>
+
+}

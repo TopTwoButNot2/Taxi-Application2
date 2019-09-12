@@ -1,0 +1,52 @@
+﻿@model TaxiApplication.Data.Rank
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rank</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RankName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RankName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Long)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Long)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RankId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

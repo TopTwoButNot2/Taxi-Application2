@@ -1,0 +1,45 @@
+﻿@model TaxiApplication.Models.Taxi
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Taxi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.owner.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.owner.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiMake.MakeType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiMake.MakeType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiModel.TaxiModelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiModel.TaxiModelName)
+        </dd>
+
+    
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TaxiNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

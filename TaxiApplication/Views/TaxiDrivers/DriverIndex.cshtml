@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TaxiApplication.Data.TaxiDriver>
+
+@{
+    ViewBag.Title = "DriverIndex";
+    Layout = "~/Views/Shared/_Driver.cshtml";
+}
+
+<h2>DriverIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.driver.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.owner.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.taxi.ownerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiMake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverTel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.driver.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.owner.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.taxi.ownerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSeats)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiMake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverTel)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.td }) |
+            @Html.ActionLink("Details", "Details", new { id=item.td }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.td })
+        </td>
+    </tr>
+}
+
+</table>

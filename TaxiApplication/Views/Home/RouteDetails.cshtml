@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+    BusinessLogic bl = new BusinessLogic();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RouteDetails</title>
+    @using TaxiApplication.BusinessLogics
+    
+</head>
+<body>
+    <div class="form-horizontal modal-content" style="margin-top:5%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+
+        <br />
+        <label>Route Details</label>
+
+        <table class="table table-bordered table-striped" style="width:80%">
+            <tr>
+                <th>
+                    @Html.DisplayName("Rank")
+                </th>
+                <th>
+                    @Html.DisplayName("Route")
+                </th>
+                @*<th>
+                    @Html.DisplayName("Route Status")
+                </th>*@
+                <th>
+                    @Html.DisplayName("Route Price")
+                </th>
+                <th>
+                    @Html.DisplayName("Taxi Status")
+                </th>
+
+            </tr>
+            @foreach (var a in bl.getRouteDetails(Convert.ToInt16(Session["rid"])))
+            {
+            <tr>
+                <td>@a.rank.RankName</td>
+                <td>@a.route.RouteName</td>
+                <td>@a.RoutePrice</td>
+                <td> "" </td>
+                <td>
+                    <a href="@Url.Action("GetPassengerRoute", "Home", new { id = a.RouteId })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+
+                </td>
+
+            </tr>
+            }
+        </table>
+
+        <h3>Stop Overs</h3>
+       
+        <ul>
+            @{
+                foreach (var a in bl.StopOvers(Convert.ToInt16(Session["rid"])))
+                {
+                    <li>@a.stop</li>
+                }
+            }
+        </ul>
+           
+        
+    </div>
+
+</body>
+</html>

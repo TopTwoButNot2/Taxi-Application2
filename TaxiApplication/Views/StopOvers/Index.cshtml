@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TaxiApplication.Data.StopOver>
+@using TaxiApplication.BusinessLogics
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    BusinessLogic bl = new BusinessLogic();
+}
+<div id="listheader">
+    <p>
+        <a href="~/StopOvers/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+    </p>
+
+</div>
+
+<p>Stop Overs - @TempData["count"] Records</p>
+
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+        <th>
+            @Html.DisplayName("Route")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stop)
+        </th>
+        @*<th>
+            @Html.DisplayName("Latitude")
+        </th>
+        <th>
+            @Html.DisplayName("Longitude")
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.RouteName)
+            @*@bl.getRoute(item.RouteId)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stop)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.lat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.longitude)
+        </td>*@
+
+        <td>
+            <a href="@Url.Action("Details","StopOvers", new { id=item.StopID })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+            <a href="@Url.Action("Edit","StopOvers", new { id=item.StopID })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Delete", "StopOvers", new { id = item.StopID })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+        </td>
+    </tr>
+    }
+
+</table>

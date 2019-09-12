@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TaxiApplication.Data.RouteViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RankName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteDistance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pricevalue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiStatus)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.StopOvers)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RankName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteDistance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pricevalue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiStatus)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.StopOvers)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.rvmId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.rvmId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.rvmId })
+        </td>
+    </tr>
+}
+
+</table>

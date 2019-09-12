@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TaxiApplication.Models.Schedule>
+@{
+    ViewBag.Title = "Create";
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_Admin.cshtml";
+
+    }
+    else if (User.IsInRole("RankManager"))
+    {
+        Layout = "~/Views/Shared/_Owner.cshtml";
+
+
+    }
+
+}
+
+
+<div id="accordion">
+
+
+    @{
+        foreach (var x in Model.Select(n => n.route.RouteName).Distinct())
+        {
+            <h3>Route :@x</h3>
+
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>
+                            DateFrom
+                        </th>
+
+                        <th>
+                            DateTo
+                        </th>
+                        <th>
+                            Position
+                        </th>
+                        <th>
+                            OwnerName
+                        </th>
+                        <th>
+                            Rank
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.Where(a => a.route.RouteName.Equals(@x)))
+                    {
+                        <tr>
+                            <td>
+                                @item.DateFrom
+                            </td>
+                            <td>
+                                @item.DateTo
+                            </td>
+                            <td>
+                                @item.Position
+                            </td>
+                            <td>
+                                @item.owner.FirstName
+                            </td>
+                            <td>
+                                @item.rank.RankName
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+    }
+
+</div>
+

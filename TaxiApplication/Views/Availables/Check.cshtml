@@ -1,0 +1,106 @@
+﻿@model IEnumerable<TaxiApplication.Data.Available>
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+
+}
+
+<h2>Index</h2>
+
+<div id="listheader">
+    <p>
+        <a href="~/Availables/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+    </p>
+</div>
+
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+        <th>
+            @Html.DisplayName("Owner Name")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.schedule.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiDriver.TaxiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.schedule.route.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Week)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.ReservedSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableSeats)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.owner.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.taxi.TaxiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.driver.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.route.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.id)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservedSeats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableSeats)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+            @{
+                var taxiId = item.TaxiDriver.TaxiNo;
+            }
+            <a href="#" onclick="checkoutTaxi('@(taxiId)')">CheckOut</a>
+        </td>
+    </tr>
+                }
+</table>
+@section Scripts{
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDaAoN3G4KexEhCHzLhmCftxvPREdlgkto",
+            authDomain: "taxi-app-sa.firebaseapp.com",
+            databaseURL: "https://taxi-app-sa.firebaseio.com",
+            projectId: "taxi-app-sa",
+            storageBucket: "taxi-app-sa.appspot.com",
+            messagingSenderId: "656805543604",
+            appId: "1:656805543604:web:995f80417dfca3f2"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="~/Scripts/rankCheckout.js"></script>
+}
+

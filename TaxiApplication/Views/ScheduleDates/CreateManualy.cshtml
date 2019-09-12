@@ -1,0 +1,48 @@
+﻿@model TaxiApplication.Data.ScheduleDate
+
+@{
+    ViewBag.Title = "Check Out";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+
+<h2>CreateManualy</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+    <h4>ScheduleDate</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <span class="w3-left">
+        <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/ScheduleDates/Index"> Back </a>
+    </span>
+
+    <span class="w3-right">
+        <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+    </span>
+    <br />
+    <br />
+</div>
+}
+
+

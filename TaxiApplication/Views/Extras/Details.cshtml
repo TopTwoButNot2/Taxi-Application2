@@ -1,0 +1,35 @@
+﻿@model TaxiApplication.Data.Extra
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Extra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtraPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExtraPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtraType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExtraType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.extrasID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

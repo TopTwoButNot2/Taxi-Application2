@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TaxiApplication.Data.ReservedList>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerTel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoutePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSeats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoadingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepertureTime)
+        </td>
+        @*<td>
+            <img src="@Url.Action("RenderImage", "TaxiMakes", new { id = item.Key})" width="50" height="60" />
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerTel)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Key }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Key }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Key })
+        </td>
+    </tr>
+}
+
+</table>

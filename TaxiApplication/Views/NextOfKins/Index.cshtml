@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TaxiApplication.Data.NextOfKin>
+
+@{
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div id="listheader">
+        <p>
+            <a href="~/NextOfKins/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+        </p>
+    </div>
+
+    <p>Next of Kins - @TempData["count"] Records</p>
+    <table class="table table-bordered table-striped" style="width:80%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.passenger.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.passenger.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details","NextOfKins", new { id=item.IdNo })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                    <a href="@Url.Action("Edit","NextOfKins", new { id=item.IdNo })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Delete", "NextOfKins", new { id = item.IdNo })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

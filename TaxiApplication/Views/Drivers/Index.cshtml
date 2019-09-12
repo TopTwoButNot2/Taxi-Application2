@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TaxiApplication.Data.Driver>
+
+@{
+    Layout = "~/Views/Shared/_Owner.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div id="listheader">
+        <p>
+            <a href="~/Drivers/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+        </p>
+    </div>
+
+    <p>Drivers - @TempData["count"] Records</p>
+    <table class="table table-bordered table-striped" style="width:80%">
+        <tr>            
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseExpiryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseExpiryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details","Drivers", new { id=item.driverID })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                    <a href="@Url.Action("Edit","Drivers", new { id=item.driverID })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Delete", "Drivers", new { id = item.driverID })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<TaxiApplication.Data.TaxiHire>
+
+@{
+    ViewBag.Title = "BookVehicle";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>Rent a Car</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarGroup.cgName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fuel.FuelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transmission.transName)
+            </th>   
+            <th>
+                @Html.DisplayNameFor(model => model.MakeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxiModelID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost_Per_Day)
+            </th>
+
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarGroup.cgName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fuel.FuelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transmission.transName)
+            </td>
+            <td>
+                @Html.DisplayName(item.getMake())
+            </td>
+            <td>
+                @Html.DisplayName(item.getModel())
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost_Per_Day)
+            </td>
+
+            <td>
+                @Html.ActionLink("Book Now","Create", "Bookings", new { id = item.vehicleID },new { @class="btn btn-info"}) |
+                @Html.ActionLink("Edit", "Edit", new { id=item.vehicleID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.vehicleID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.vehicleID })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+<hr />
+
+<div class="row">
+    <diV class="col-md-4">
+        @foreach (var item in Model)
+        {
+
+
+            <div class="col-10 mx-auto my-3 col-md-6 col-lg-4">
+                <div class="card car-card">
+                    <img src="@Url.Action("RenderImage", "TaxiHires", new { id = item.vehicleID})" width="300" height="250" />
+
+                    <div class="card-body">
+                        <div class="car-info d-flex justify-content-between">
+                            <!--first  flex child-->
+                            <div class="car-text text-uppercase">
+                                <h6 class="font-weight-bold">@Html.DisplayFor(modelItem => item.TaxiMakes.MakeType) - @Html.DisplayFor(modelItem => item.TaxiModels.TaxiModelName)</h6>
+                                <h6 class="car-value align-self-centre py-2 px3">
+                                    <label>Cost Per Days</label> -<span class="car-price">@Html.DisplayFor(modelItem => item.Cost_Per_Day)</span>
+                                </h6>
+                                <h6><label>Cost Per KM </label> -<span class="car-price">@Html.DisplayFor(modelItem => item.KiloRate)</span></h6>
+
+                            </div>
+                            <!--second  flex child-->
+
+                        </div>
+                    </div>
+                    <!--end of card-->
+                    <div class="card-footer text-capitalize d-flex justify-content-between">
+                        @*<p><span><i class="fas fa-car"></i></span>@Html.DisplayFor(modelItem => item..CategoryName)</p>*@
+                        <p><span><i class="fas fa-cogs"></i></span>@Html.DisplayFor(modelItem => item.Transmission.transName)</p>
+                        <p><span><i class="fas fa-gas-pump"></i></span>@Html.DisplayFor(modelItem => item.Fuel.FuelName)</p>
+                    </div>
+                    @Html.ActionLink("Hire Now", "Create", "Bookings", new { id = item.vehicleID }, new { @class = "btn btn-info" })
+                </div>
+            </div>
+        }
+    </diV>
+</div>

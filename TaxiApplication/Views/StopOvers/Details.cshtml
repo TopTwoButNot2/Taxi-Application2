@@ -1,0 +1,35 @@
+﻿@model TaxiApplication.Data.StopOver
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StopOver</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stop)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StopID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

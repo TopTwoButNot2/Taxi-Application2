@@ -1,0 +1,74 @@
+﻿@model TaxiApplication.Data.Laggage2
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<div>
+    <h4>Laggage2</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.passenger.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passenger.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggagSmall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggagSmall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggageMed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggageMed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggageLrg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggageLrg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modify", "Modify", new { id = Model.ID }) |
+    @*@Html.ActionLink("Confirm", "index", "Home")*@
+    @Html.ActionLink("Cobfirm and Accept payment", "OnceOff", "Bookings", new { area = "" }, new { @class = "btn btn-block btn-success" })
+
+</p>

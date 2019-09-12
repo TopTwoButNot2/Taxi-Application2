@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Distance between from Point A to Point B and multiple target destinations</h2>
+        <p>
+            @Html.ActionLink("Find your Location", "GetYourLocation", "Destinations", null, new { @class = "btn btn-primary" })
+        </p>
+
+        <div> Add Destination</div>
+        <div>
+            <input id="travelto" type="text" name="name" value="Mariannhill, Pinetown, South Africa" />
+            <input type="button" value="Add" onclick="PushDestination()" />
+
+            <body onload="openAddEditForm()">
+                <div class="form-group">
+                    <label>Grade Allocated :</label>
+                    <select id="ddClassRoom" onchange="hellow()" class="form-control">
+                        <option value="">Select Grade</option>
+
+                    </select>
+                </div>
+                <script>
+
+                    var slectedID = 0;
+                    var id = [];
+                    var Routee = [];
+                    function hellow() {
+                        var e = document.getElementById("ddClassRoom");
+                        var strUser = e.options[e.selectedIndex].value;
+                        slectedID = id[strUser];
+                        setDestination(Routee[strUser]);
+                        alert("Heelooo " + strUser + Routee[strUser]);
+                    }
+                    function openAddEditForm() {
+
+                        var i = 0;
+                        $.ajax({
+                            type: "GET",
+                            url: "/Error/DemoS",
+                            success: function (data) {
+                                var select = document.getElementById('#ddClassRoom');
+                                $('#ddClassRoom').empty();
+                                $('#ddClassRoom').append($('<option></option>').val('').html('Select Route'));
+                                //For loop to get all events in database
+                                $.each(data, function (i, v) {
+
+                                    $('#ddClassRoom').append($('<option></option>').val(i).html(v.RouteName));
+                                    //select.options[pot.options.length] = new Option(v.GradeName, v.classRoomId);
+                                    //var opt = document.createElement("option");
+                                    //opt.value = v.classRoomId;
+                                    //opt.innerHTML = v.GradeName;
+                                    //pot.add(opt);
+                                    id.push(v.RouteId);
+                                    Routee.push(v.RouteName);
+                                    i = i + 1;
+                                })
+                            },
+                            //Catch error of loading
+                            error: function (error) {
+                                alert('Failed to load all classes in Classroom!')
+                            },
+                        })
+                    }
+
+
+                </script>
+            </body>
+            @*<a href="#" onclick="setDestination('Umlazi V, SA')">Tagmere, UK. </a>
+                <a href="#" onclick="setDestination('Bosham, UK')">Bosham, UK</a>*@
+        </div>
+        <div id="destinations"></div><br />
+        Source : <input id="travelfrom" type="text" name="name" value="Durban, South Africa" />   <br />  <br />
+
+        <input type="button" value="Calculate" onclick="GetRoute()" />
+        <input type="button" value="Save" onclick="GetRoute()" />
+        <p></p>
+        <br />
+        <div id="dvDistance">
+            <table id="tblResults" border="1" cellpadding="10">
+                <tr>
+                    <th> Start </th>
+                    <th> End </th>
+                    <th> Distance </th>
+                    <th> Duration </th>
+                </tr>
+            </table>
+
+        </div>
+
+        <p></p>
+
+        <div id="dvMap" style="min-height:500px"></div>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <!--ENSURE YOU CHANGE TO YOUR OWN API KEY HERE !!! -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0" type="text/javascript"></script>
+
+    <!-- code for example 1 -->
+    <script>
+        function SaveEvent(data) {
+            $.ajax({//Ajax is used for to call controller to get and post data.
+                type: 'POST',
+                url: '/Error/Update', //Call Controller
+                data: data,
+                success: function (data) {
+                    if (data.status) {
+
+                    }
+                    else {
+                        alert('Failed to Save!');
+                    }
+                },
+                error: function () {
+                    alert('Failed to Save!');
+                }
+            })
+        }
+
+        var source, destination;
+        var locations = [];
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+
+        // initialise the location of the map on Chichester in England (ref lat and lng)
+        var map = new google.maps.Map(document.getElementById('dvMap'), {
+            center: { lat: -29.8579, lng: 31.0292 },
+            zoom: 13,
+            mapTypeId: 'roadmap'
+        });
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            new google.maps.places.SearchBox(document.getElementById('travelfrom'));
+            new google.maps.places.SearchBox(document.getElementById('travelto'));
+            directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+        });
+
+        function PushDestination() {
+            destination = document.getElementById("travelto").value;
+            locations.push(destination);
+            document.getElementById("travelto").value = "";
+            destinationArray = document.getElementById("destinations");
+            destinationArray.innerHTML += destination + "<br />";
+        }
+
+        function setDestination(dest) {
+            document.getElementById('travelto').value = dest;
+            PushDestination();
+        }
+
+
+        function GetRoute() {
+
+            directionsDisplay.setMap(map);
+
+            source = document.getElementById("travelfrom").value;
+            destination = document.getElementById("travelto").value;
+
+            var waypoints = [];
+            for (var i = 0; i < locations.length; i++) {
+                var address = locations[i];
+                if (address !== "") {
+                    waypoints.push({
+                        location: address,
+                        stopover: true
+                    });
+                }
+            }
+
+            var request = {
+                origin: source,
+                destination: waypoints[0].location,
+                waypoints: waypoints, //an array of waypoints
+                optimizeWaypoints: true, //set to true if you want google to determine the shortest route or false to use the order specified.
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            };
+
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    var dvDistance = document.getElementById("dvDistance");
+                    var distance = 0;
+                    var minute = 0.00;
+                    response.routes[0].legs.forEach(function (item, index) {
+                        if (index < response.routes[0].legs.length - 1) {
+                            distance = distance + parseInt(item.distance.text);
+                            minute = parseFloat(minute) + parseFloat(item.duration.value / 60);
+
+                            tbl = document.getElementById("tblResults");
+                            var row = tbl.insertRow(1);
+                            var cell = row.insertCell(0);
+                            cell.innerText = source;
+                            var cell = row.insertCell(1);
+                            cell.innerText = item.end_address;
+                            var cell = row.insertCell(2);
+                            cell.innerText = distance;
+                            var data = {
+
+                                RouteId: slectedID,
+                                RouteDistance: distance ,
+                                RouteDuration: minute.toFixed(2)
+                            }
+                            SaveEvent(data);
+                             @*@Destination=distance;
+                            @Duration= minute.toFixed(2);*@
+
+                            var cell = row.insertCell(3);
+                            cell.innerText = minute.toFixed(2) + " min";
+                        }
+                    });
+                    directionsDisplay.setDirections(response);
+                }
+                else {
+                    //handle error
+                }
+            })
+        };
+
+    </script>
+    <!-- end code for example 1 -->
+}

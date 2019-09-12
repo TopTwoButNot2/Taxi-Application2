@@ -1,0 +1,62 @@
+﻿@model TaxiApplication.Data.RankManager
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal modal-content" style="margin-top:5%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+    <h4>Add Rank Manager</h4>
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    <label>First Name</label>
+    <input type="text" name="FirstName" class="w3-border w3-padding" required placeholder="enter first name" />
+    @*@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })*@
+
+    <label>Last Name</label>
+    <input type="text" name="LastName" class="w3-border w3-padding" required placeholder="enter last name" />
+    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+    <label>Gender</label>
+    <br />
+    <input type="radio" name="Gender" value="Male" /> <span>Male</span>
+    <input type="radio" name="Gender" value="Female" /> <span>Female</span>
+    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+    <br />
+
+    <label>Phone Number</label>
+    <input type="number" name="PhoneNumber" class="w3-border w3-padding" required placeholder="10 digit phone number" />
+    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+    <label>Address</label>
+    <br />
+    <input type="text" name="Address" required class="w3-border w3-padding" placeholder="enter address" />
+    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+    <br />
+
+    <label>Email</label>
+    <input type="email" name="Email" class="w3-border w3-padding" required placeholder="example some@gmail.com" />
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+    <label>Select Rank</label>
+    @Html.DropDownList("RankId", null, htmlAttributes: new { @class = "w3-border w3-padding", style = "width:100%" })
+    @Html.ValidationMessageFor(model => model.RankId, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    <span class="w3-left">
+        <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/RankManagers/Index"> Back </a>
+    </span>
+
+    <span class="w3-right">
+        <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+    </span>
+    
+    <br />
+    <br />
+</div>
+}
+
+

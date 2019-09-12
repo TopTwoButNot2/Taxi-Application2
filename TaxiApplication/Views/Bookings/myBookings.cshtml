@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TaxiApplication.Data.Booking>
+
+@{
+    ViewBag.Title = "myBookings";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+
+}
+<hr />
+<hr />
+<h2>My Bookings</h2>
+
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalTotalCost)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PickUpDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.TotalCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.FinalTotalCost)
+        </td>
+        <td>
+            <a href="@Url.Action("Details","Bookings", new { id=item.BookingId })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+            <a href="@Url.Action("Edit","Bookings", new { id=item.BookingId })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Delete", "Bookings", new { id = item.BookingId })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+        </td>
+    </tr>
+    }
+
+</table>

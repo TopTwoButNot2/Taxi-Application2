@@ -1,0 +1,56 @@
+﻿
+@model IEnumerable<TaxiApplication.Data.ReservedTaxi>
+@using TaxiApplication.BusinessLogics
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+
+}
+
+
+
+@{
+    ViewBag.Title = "Avail";
+    Logic l = new Logic();
+}
+
+<div id="listheader">
+
+
+</div>
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+
+      
+        <th>@Html.DisplayNameFor(x => x.schedule.route.RouteName)</th>
+        <th>@Html.DisplayNameFor(m => m.driver.FirstName)</th>
+       
+        <th>@Html.DisplayNameFor(m => m.driver.PhoneNumber)</th>
+
+        <th>@Html.DisplayNameFor(m => m.TaxiNo)</th>
+        <th>@Html.DisplayNameFor(m => m.taxi.TaxiMake.MakeType)</th>
+        <th>@Html.DisplayNameFor(m => m.Count)</th>
+
+        <th></th>
+    </tr>
+
+
+    @foreach (var x in Model)
+    {
+    <tr>
+
+        <td>@x.schedule.route.RouteName</td>
+        <td>@x.driver.FirstName</td>
+        <td>@x.driver.PhoneNumber</td>
+        <td>@x.taxi.RegNo</td>
+        <td>@x.taxi.TaxiMake.MakeType</td>
+        <td>@x.Count</td>
+        <td>
+            <a href="@Url.Action("Demo","ReservedTaxis")"><b style="font-family:'Agency FB'">View More</b></a>
+        </td>
+
+    </tr>
+    }
+</table>
+

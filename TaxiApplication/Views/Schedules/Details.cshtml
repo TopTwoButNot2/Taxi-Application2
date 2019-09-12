@@ -1,0 +1,74 @@
+﻿@model TaxiApplication.Models.Schedule
+@{
+    ViewBag.Title = "Route Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+<h2 class="title text-center">@ViewBag.Title</h2>
+<div class="row">
+
+    <div class="col-md-6 pull-right">
+        <table class="table table-bordered table-striped" style="width:80%">
+
+            <tr>
+                <th>@Html.LabelFor(model => Model.No)</th>
+                <td>
+                    @Html.DisplayFor(model => model.No)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.owner.FirstName)</th>
+                <td>
+                    @Html.DisplayFor(model => model.owner.FirstName)
+                </td>
+            </tr>
+
+            <tr>
+                <th>@Html.LabelFor(model => Model.route.RouteName)</th>
+                <td>
+                    @Html.DisplayFor(model => model.route.RouteName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.rank.RankName)</th>
+                <td>
+                    @Html.DisplayFor(model => model.rank.RankName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.DateFrom)</th>
+                <td>
+                    @Html.DisplayFor(model => model.DateFrom)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.DateTo)</th>
+                <td>
+                    @Html.DisplayFor(model => model.DateTo)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.Position)</th>
+                <td>
+                    @Html.DisplayFor(model => model.Position)
+                </td>
+            </tr>
+
+            
+            <tr>
+                <td>
+                    <a class="btn btn-default" href="@Url.Action("Index","Schedules")">
+                        <i class="fa fa-angle-left"></i>
+                        Back to List
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-default" href="@Url.Action("Edit","Schedules", new { id = Model.No })">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

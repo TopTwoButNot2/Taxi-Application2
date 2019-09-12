@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TaxiApplication.Data.Available>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Owner Name")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.schedule.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiDriver.TaxiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.schedule.route.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Week)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.owner.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.taxi.TaxiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.driver.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.route.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.RoutePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schedule.ScheduleDate.Count)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiDriver.taxi.TaxiModel.Seats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+
+
+    </tr>
+}
+
+</table>

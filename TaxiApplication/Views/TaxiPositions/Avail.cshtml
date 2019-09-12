@@ -1,0 +1,81 @@
+﻿@model TaxiApplication.Data.TaxiPosition
+
+@{
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+}
+
+<h2>Avail</h2>
+
+<h3>Are you sure you want to avail this?</h3>
+<div>
+    <h4>TaxiPosition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.schedule.ownerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.schedule.owner.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiDriver.driverID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiDriver.driver.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.schedule.Position)
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.schedule.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiDriver.TaxiNo)
+
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxiDriver.TaxiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.schedule.route.RouteName)
+
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.schedule.route.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Week)
+
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Week)
+        </dd>
+        <dt>
+            @Html.DisplayName("Number of seats")
+
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxiDriver.taxi.TaxiModel.Seats)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Avail" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TaxiApplication.Data.RouteViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RouteDetails</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RankName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RankName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.rvmId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.rvmId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.rvmId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

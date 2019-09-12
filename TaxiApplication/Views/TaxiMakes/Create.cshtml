@@ -1,0 +1,83 @@
+﻿@model TaxiApplication.Data.TaxiMake
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "TaxiMakes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+        <h4>TaxiMake</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.MakeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MakeId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MakeType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MakeType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MakeType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <i class="fa fa-file-picture-o"></i>
+                <input type="file" name="file" value="Upload File" />
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <span class="w3-left">
+            <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/TaxiMakes/Index"> Back </a>
+        </span>
+
+        <span class="w3-right">
+            <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+        </span>
+        <br />
+        <br />
+        <br />
+    </div>
+    <div class="col-md-6">
+        <div>
+            <img id="image_preview" src="#" alt="" />
+        </div>
+        <div class="col-md-4">
+            <img id="image_preview" src="#" alt="" @*style="border: 5px solid #ccc"*@ />
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    //image preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_preview')
+                    .attr('src', e.target.result)
+                    .width(300)
+                    .height(300);
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

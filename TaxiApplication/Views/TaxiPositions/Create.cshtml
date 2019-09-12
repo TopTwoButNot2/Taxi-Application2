@@ -1,0 +1,80 @@
+﻿@using TaxiApplication.Data
+@using TaxiApplication.BusinessLogics
+@{
+    ViewBag.Title = "AddPosition";
+    //Logic l = new Logic();
+    ScheduleLogics l = new ScheduleLogics();
+    TaxiDriverLogics tl = new TaxiDriverLogics();
+    Layout = "~/Views/Shared/_Owner.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+
+@using (Html.BeginForm("Create", "TaxiPositions", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <br />
+    <h2>Taxi Position</h2>
+    <div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+        <label>Select Position</label>
+        <br />
+        <select name="No">
+            @{
+
+                foreach (var x in l.schedulList(User.Identity.Name))
+                {
+                    <option value="@x.No">@x.route.RouteName - @x.Position</option>
+                }
+            }
+        </select>
+
+
+
+        <br />
+        <label>Select Taxi</label>
+        <select name="td">
+            @{
+                foreach (var x in tl.TaxiDriversList(User.Identity.Name))
+                {
+                    <option value="@x.td">@x.TaxiNo</option>
+
+                }
+            }
+
+        </select>
+        <br />
+        @*<label>Select Taxi Number</label>*@
+        <br />
+        @*<select name="TaxiNo">
+                @{
+                    foreach (var x in l.TaxiList(User.Identity.Name))
+                    {
+                        <option value="@x.TaxiNo">@x.RegNo</option>
+
+                    }
+                }
+            </select>*@
+
+        <br><br />
+
+
+        <span class="w3-left">
+            <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/TaxiPositions/Index"> Back </a>
+        </span>
+
+        <span class="w3-right">
+            <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+        </span>
+
+        <br />
+        <br />
+        <br />
+    </div>
+
+}

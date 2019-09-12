@@ -1,0 +1,91 @@
+﻿@model TaxiApplication.Data.ReservedList
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReservedList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.td)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.td)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoutePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumSeats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoadingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepertureTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Key }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,90 @@
+﻿@model TaxiApplication.Data.Laggage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Laggage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.passengers.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passengers.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.schedule.ownerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.schedule.ownerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LaggageID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

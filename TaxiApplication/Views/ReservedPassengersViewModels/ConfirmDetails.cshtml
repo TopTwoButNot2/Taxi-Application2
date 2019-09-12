@@ -1,0 +1,83 @@
+﻿@model TaxiApplication.Data.ReservedPassengersViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>Confirm Details</h2>
+
+<div>
+    <h4>Confirm Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggagSmall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggagSmall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggageMed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggageMed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggageLrg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggageLrg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VMKY }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

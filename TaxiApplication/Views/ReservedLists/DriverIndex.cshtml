@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TaxiApplication.Data.ReservedList>
+
+@{
+    ViewBag.Title = "DriverIndex";
+    Layout = "~/Views/Shared/_Driver.cshtml";
+}
+
+<h2>DriverIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+         
+        
+        <th>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReservedPassengers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.LoadingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepertureTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableSeats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservedPassengers)
+        </td>
+        
+    </tr>
+}
+
+</table>

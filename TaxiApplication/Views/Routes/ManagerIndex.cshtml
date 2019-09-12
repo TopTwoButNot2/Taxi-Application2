@@ -1,0 +1,91 @@
+﻿@model IEnumerable<TaxiApplication.Data.Route>
+
+@{
+    ViewBag.Title = "ManagerIndex";
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+}
+
+<h2>ManagerIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rank.RankName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rankmanager.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteDistance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.latDurban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.longitudeDurban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.latDestination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.longitudeDestination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StopOver)
+        </th>
+        
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rank.RankName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rankmanager.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteDistance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.latDurban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.longitudeDurban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.latDestination)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.longitudeDestination)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopOver)
+        </td>
+        
+         
+        <td>
+
+            @Html.ActionLink("View Taxis", "ManagerIndex", "TaxiPositions")
+          
+    </tr>
+}
+
+</table>

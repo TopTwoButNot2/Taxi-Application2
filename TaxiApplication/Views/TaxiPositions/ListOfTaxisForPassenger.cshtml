@@ -1,0 +1,123 @@
+﻿@model IEnumerable<TaxiApplication.Data.TaxiPosition>
+
+@{
+    ViewBag.Title = "ListOfTaxisForPassenger";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>ListOfTaxisForPassenger</h2>
+
+@using (Html.BeginForm("ListOfTaxisForPassenger", "TaxiPositions", FormMethod.Get))
+{
+    @Html.TextBox("search") <input type="submit" value="search" />
+}
+<tbody>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td>
+                No Match
+            </td>
+        </tr>
+    }
+
+</tbody>
+
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiMake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerTel)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoutePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverTel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxiModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxiMake)
+            </td>
+            <td>
+                <img src="@Url.Action("RenderImage", "TaxiDrivers", new { id = item.td})" width="50" height="60" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerTel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxiNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadingTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepertureTime)
+            </td>
+            <td>
+                @Html.ActionLink("Search By TaxiNo Available seats", "ViewSeats", "ReservedLists")||
+
+                @Html.ActionLink("Reserve", "Reserve", new { id = item.ID })
+            </td>
+
+        </tr>
+
+    }
+
+</table>

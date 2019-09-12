@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Real-time Tracking";
+}
+
+<h2>Real-time Tracking</h2>
+
+<div id="map" style="width: 100%; height: 500px;"></div>
+
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDaAoN3G4KexEhCHzLhmCftxvPREdlgkto",
+            authDomain: "taxi-app-sa.firebaseapp.com",
+            databaseURL: "https://taxi-app-sa.firebaseio.com",
+            projectId: "taxi-app-sa",
+            storageBucket: "taxi-app-sa.appspot.com",
+            messagingSenderId: "656805543604",
+            appId: "1:656805543604:web:995f80417dfca3f2"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script src="~/Scripts/mapTracker.js"></script>
+}
+

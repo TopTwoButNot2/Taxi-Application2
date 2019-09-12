@@ -1,0 +1,171 @@
+﻿@model TaxiApplication.Data.ReservedViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReservedViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoutePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerTel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerTel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverTel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverTel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiMake)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiMake)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoadingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepertureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerTel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerTel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggagSmall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggagSmall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggageMed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggageMed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLaggageLrg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLaggageLrg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LaggagePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LaggagePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VMkey }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

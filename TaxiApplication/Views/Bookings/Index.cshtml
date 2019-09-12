@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TaxiApplication.Data.Booking>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+
+}
+<hr />
+<h2>All Bookings</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Passenger
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking_Cost)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalTotalCost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.userId)
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickUpDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(m => item.Booking_Cost)   
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.FinalTotalCost)
+        </td>
+        <td>
+            @Html.ActionLink("Approve", "ConfirmBooking", new { id = item.BookingId }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Edit", "Edit", new { id = item.BookingId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("More", "Details", new { id = item.BookingId }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Cancel", "Delete", new { id = item.BookingId }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Return", "ReturnVehicle", new { id = item.BookingId }, new { @class = "btn btn-success" })
+        </td>
+    </tr>
+}
+
+</table>

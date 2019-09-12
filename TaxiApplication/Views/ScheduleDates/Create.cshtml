@@ -1,0 +1,49 @@
+﻿@model TaxiApplication.Data.ScheduleDate
+
+
+@{
+    ViewBag.Title = "Check Out";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+    <h4>ScheduleDate</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExtendSchedule, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.RadioButtonFor(m => m.ExtendSchedule, "Yes")<tex>Yes</tex>
+            @Html.RadioButtonFor(m => m.ExtendSchedule, "No")<tex>No</tex>
+
+            @Html.ValidationMessageFor(model => model.ExtendSchedule, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <span class="w3-left">
+        <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/ScheduleDates/Index"> Back </a>
+    </span>
+
+    <span class="w3-right">
+        <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+    </span>
+    <br />
+    <br />
+    <br />
+
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

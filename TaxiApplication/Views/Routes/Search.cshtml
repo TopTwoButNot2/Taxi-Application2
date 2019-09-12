@@ -1,0 +1,91 @@
+﻿@model IEnumerable<TaxiApplication.Data.Route>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+<h2>Index</h2>
+
+<p>
+    <a href="~/Routes/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+</p>
+<body>
+    <p>Taxi Routes - @TempData["count"] Records</p>
+    @using (Html.BeginForm("Search", "Routes", FormMethod.Get))
+    {
+        <p> Search by Route: @Html.TextBox("searchString") <input type="submit" value="Search" /></p>
+    }
+    @using (Html.BeginForm("Search", "Routes", FormMethod.Get))
+    {
+        <table class="table table-bordered table-striped" style="width:80%">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().Rank.RankName)*@
+                    RankName
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().rankmanager.FirstName)*@
+                    FirstName
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().RouteName)*@
+                    RouteName
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().RouteDistance)*@
+                    RouteDistance
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rank.RankName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.rankmanager.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RouteName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RouteDistance)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "Routes", new { id = item.RouteId })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                        <a href="@Url.Action("Edit", "Routes", new { id = item.RouteId })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", "Routes", new { id = item.RouteId })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+    }
+
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                types: ['(cities)'],
+                componentRestrictions: { country: "ZA" }
+            };
+
+            var input = document.getElementById('searchString');
+            var places = new google.maps.places.Autocomplete(input, options);
+
+
+        });
+    </script>
+
+}

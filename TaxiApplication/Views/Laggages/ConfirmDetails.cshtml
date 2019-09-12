@@ -1,0 +1,115 @@
+﻿@model TaxiApplication.Data.Laggage
+
+@{
+    ViewBag.Title = "ConfirmDetails";
+    var msg = TempData["AlertMessage"] ?? string.Empty;
+}
+
+@*<script type="text/javascript">
+    var msg = '@msg';
+    if (msg)
+    {
+        alert(msg)
+    }
+
+</script>*@
+
+
+<br /><br />
+      <div class="panel panel-info">
+          <div class="panel-heading">
+              <h3>Confirm Application</h3>
+          </div>
+          <img src="@Url.Action("RenderImage", "Laggages", new { id = Model.LaggageID})" width="300" height="250" />        
+          <div class="panel-body" style="height:25em;overflow-y:auto">
+              <h4>Please Confirm Correctness of details.</h4>
+              <table class="table table-bordered table-striped">
+                  <tr>
+                      @*<td>
+                        Client
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayName(Model.getLastName())
+                        @Html.DisplayName(Model.getFirstName())
+                    </td>*@
+                  </tr>
+
+                  <tr>
+                      <td>
+                          Laggage Number
+                      </td>
+
+                      <td>
+                          @Html.DisplayFor(m => m.NumberLaggage)
+
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Size
+                      </td>
+
+                      <td>
+                          @Html.DisplayFor(m => m.Size) S
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Total Price
+                      </td>
+
+                      <td>
+                          @*@Html.DisplayFor(m => m.TotalPrice)*@R500
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Departure Date
+                      </td>
+
+                      <td>
+                          @Html.DisplayName(Model.DepartureDate.ToString())
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                       Route Name
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(Model.schedule.route.RouteName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Rank Name
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(Model.schedule.rank.RankName)
+                    </td>
+                  
+                  <tr>
+                    @*<td>
+                      Driver Name
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(Model.schedule.)
+                    </td>*@
+                </tr>
+
+
+
+              </table>
+          </div>
+      </div>
+      <p>
+          @*@Html.ActionLink("Confirm", "ThankYouPage", "Home", new { id = Model.LaggageID }, new { @class = "btn btn-success" })*@
+          @Html.ActionLink("Continue To Map", "Maps", "Home", new { id = Model.LaggageID }, new { @class = "btn btn-success" })
+
+          @*<a href="~/Home/ThankYouPage" class="btn btn-success">Confirm</a>|*@
+          <a href="~/Laggages/Edit/@Model.LaggageID" class="btn btn-primary">Edit Details</a>
+      </p>

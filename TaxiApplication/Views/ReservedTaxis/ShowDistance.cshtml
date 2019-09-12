@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Integrate Google Map Direction Between Source and Destination Address</title>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&radius=200"></script>
+    <script type="text/javascript"
+            src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <link href="Css/bootstrap.css" rel="stylesheet" />
+    <script src="Script/jquery-1.10.1.min.js"></script>
+    <script src="Script/jquery.geocomplete.js"></script>
+    <meta name="description" content="Integrate google map.Custom pin point for pick up and drop off address.Direction route between pick up and drop off.calculate distance between pickup and drop off.calculate time to reach your destination.get travel mode." />
+    <meta name="keywords" content="google map,custom pin point,route direction,travel mode,distance,time" />
+
+</head>
+<body>
+    <div class="container">
+        <!-- Content Start -->
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+            <strong>Note:</strong> Please allow access to your location to properly find your source and destination address.
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div style="overflow: hidden; height: 500px;">
+                    <div id="mapCanvas" style="height: 500px;"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-5 col-sm-5">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                        <input class="form-control" type="text" placeholder="Source" id="PickupAddress" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                        <input class="form-control" type="text" placeholder="Destination" id="DropOffAddress" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-5">
+                <div class="form-group">
+                    <div class="input-group">
+                        <h4><span class="label-warning">Your Source address is</span></h4>
+                        <h3><b><span id="spanPick"></span></b></h3>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <h4><span class="label-warning">Your Destination address is</span></h4><h3><b><span id="spanDrop"></span></b></h3>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <h4><span class="label-warning">Travel Mode</span></h4><h3><b><span id="spanTravelMode"></span></b></h3>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <h4><span class="label-warning">Total distance</span></h4><h3><b><span id="spanDist"></span></b></h3>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <h4><span class="label-warning">Total time</span></h4><h3><b><span id="spanTime"></span></b></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+        var map;
+        var latlong;
+        var directionsService;
+        var directionsDisplay;
+        var geocoder;
+        var geolatitude;
+        var geolongitude;
+        var pickUpLatLong;
+        var dropOffLatLong;
+
+        $(document).ready(function () {
+            //map initialize
+            initialize();
+        });
+
+        function initialize() {
+
+            navigator.geolocation.getCurrentPosition(doStuff, error, setOptions);
+
+            function setOptions(geoLoc) {
+                geoLoc.enableHighAccuracy = true;
+                geoLoc.timeout = 30;
+                geoLoc.maximumAge = 0;
+            }
+
+            function doStuff(geoLoc) {
+                latlong = new google.maps.LatLng(geoLoc.coords.latitude, geoLoc.coords.longitude);
+                geolatitude = geoLoc.coords.latitude;
+                geolongitude = geoLoc.coords.longitude;
+
+                var mapOptions = {
+                    center: latlong,
+                    zoom: 15,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var image = 'img/home_alt.png';
+                map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
+
+                marker = new google.maps.Marker({
+                    position: latlong,
+                    map: map,
+                    icon: image
+                });
+            }
+        }
+
+        function error(geoLoc) {
+            doStuff("true");
+        }
+
+        $(function () {
+            $("#PickupAddress")
+                .geocomplete()
+                .bind("geocode:result", function (event, result) {
+                    $("#spanPick").text($("#PickupAddress").val());
+                    pickUpLatLong = new google.maps.LatLng(result.geometry.location.lat(), result.geometry.location.lng());
+                    routeDirection("PickupAddress", pickUpLatLong);
+                });
+        });
+
+        $(function () {
+            $("#DropOffAddress")
+                .geocomplete()
+                .bind("geocode:result", function (event, result) {
+                    $("#spanDrop").text($("#DropOffAddress").val());
+                    dropOffLatLong = new google.maps.LatLng(result.geometry.location.lat(), result.geometry.location.lng());
+                    routeDirection("DropOffAddress", dropOffLatLong);
+                });
+        });
+
+        function routeDirection(id, latLong) {
+            geocoder = new google.maps.Geocoder();
+            var mapOptions = {
+                zoom: 15,
+                center: latLong,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
+            var start = $("#PickupAddress").val();
+            var end = $("#DropOffAddress").val();
+            if (start != null && (end == null || end == '')) {
+                geocoder.geocode({ "address": start }, function (results, status) {
+                    var image;
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        image = 'img/pin_pickup_location.png';
+                        map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
+                        marker = new google.maps.Marker({
+                            position: latLong,
+                            map: map,
+                            icon: image
+                        });
+                    }
+                });
+            }
+            else if (end != null && (start == null || start == '')) {
+                geocoder.geocode({ "address": end }, function (results, status) {
+                    var image;
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        image = 'img/pin_drop_off_location.png';
+                        map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
+                        marker = new google.maps.Marker({
+                            position: latLong,
+                            map: map,
+                            icon: image
+                        });
+                    }
+                });
+            }
+            else {
+                getRoute(pickUpLatLong, dropOffLatLong);
+            }
+        }
+
+        function getRoute(pickUp, dropOff) {
+            directionsService = new google.maps.DirectionsService();
+            var mapOptions = {
+                zoom: 15
+            };
+            map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
+            var rendererOptions = {
+                map: map,
+                suppressMarkers: true
+            };
+
+            directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+
+            var request = {
+                origin: pickUp,
+                destination: dropOff,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    var leg = response.routes[0].legs[0];
+                    $("#spanDist").text(leg.distance.text);
+                    $("#spanTime").text(leg.duration.text);
+                    $("#spanTravelMode").text(response.request.travelMode);
+                    makeMarker(leg.start_location, "pickup location");
+                    makeMarker(leg.end_location, "dropoff location");
+                }
+            });
+        }
+
+        function makeMarker(position, title) {
+            var image;
+            if (title == "pickup location") {
+                image = "img/pin_pickup_location.png";
+                new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    icon: image,
+                    title: title
+                });
+            }
+            else {
+                image = "img/pin_drop_off_location.png";
+                new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    icon: image,
+                    title: title
+                });
+            }
+        }
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0&callback=initMap">
+        </script>
+    }
+
+
+
+    <script src="script.js"></script>
+
+
+</body>
+</html>
+

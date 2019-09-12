@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TaxiApplication.Data.Report>
+@using TaxiApplication.BusinessLogics
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+
+}
+
+
+
+@{
+    ViewBag.Title = "Avail";
+    Logic l = new Logic();
+}
+
+<div id="listheader">
+
+
+</div>
+@*<p>
+    @Html.BeginForm("Index2", "Reports", FormMethod.Get)
+    {
+    @Html.TextBox("search", )
+    }*@
+</p>
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+
+        @*<th>@Html.DisplayNameFor(m => m.Position)</th>*@
+        <th>@Html.DisplayNameFor(x => x.schedule.route.RouteName)</th>
+        <th>@Html.DisplayNameFor(m => m.driver.FirstName)</th>
+        <th>@Html.DisplayNameFor(m => m.driver.LicenseCode)</th>
+        <th>@Html.DisplayNameFor(m => m.driver.PhoneNumber)</th>
+
+        <th>@Html.DisplayNameFor(m => m.TaxiNo)</th>
+        <th>@Html.DisplayNameFor(m => m.taxi.TaxiMake.MakeType)</th>
+        <th>@Html.DisplayNameFor(m => m.AvailableSeats)</th>
+        <th>@Html.DisplayNameFor(m => m.Price)</th>
+        <th>@Html.DisplayNameFor(m => m.Status)</th>
+        <th>@Html.DisplayNameFor(m => m.TotalPrice)</th>
+        <th>@Html.DisplayNameFor(m => m.Date)</th>
+
+
+
+
+        <th></th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <b>
+            Rout is not available please try again later
+        </b>
+    }
+    else
+    {
+        foreach (var x in Model)
+        {
+            <tr>
+                @*<td>@x.Position</td>*@
+                <td>@x.schedule.route.RouteName</td>
+                <td>@x.driver.FirstName</td>
+                <td>@x.driver.LicenseCode</td>
+                <td>@x.driver.PhoneNumber</td>
+                <td>@x.taxi.RegNo</td>
+                <td>@x.taxi.TaxiMake.MakeType</td>
+                <td>@x.AvailableSeats</td>
+                <td>@x.Price</td>
+                <td>@x.Status</td>
+                <td>@x.TotalPrice</td>
+                <td>@x.Date</td>
+
+            </tr>
+        }
+    }
+
+</table>

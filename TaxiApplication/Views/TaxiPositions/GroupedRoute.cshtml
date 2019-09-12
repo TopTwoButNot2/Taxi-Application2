@@ -1,0 +1,113 @@
+﻿@model IEnumerable<TaxiApplication.Data.TaxiPosition> 
+
+@{
+    ViewBag.Title = "GroupedRoute";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+}
+
+
+}
+ 
+    <div id="accordion">
+
+
+        @{
+            foreach (var x in Model.Select(n => n.RouteName).Distinct())
+            {
+                <br />
+                <br />
+                <br />
+                <h3>Route :@x</h3>
+
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                td
+                            </th>
+                            <th>
+                                No
+                            </th>
+                            
+                            <th>
+                                Route Price
+                            </th>
+                            <th>
+                                Route Name
+                            </th>
+                            <th>
+                                TaxiNo
+                            </th>
+                            <th>
+                                Number of Seats
+                            </th>
+
+                            <th>
+                                Driver Name
+                            </th>
+
+
+                            <th>
+                                Loading Time
+                            </th>
+                            <th>
+                                Deperture Time
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.Where(a => a.RouteName.Equals(@x)))
+                        {
+                        <tr>
+                            <td>
+                                @item.ID
+                            </td>
+                            <td>
+                                @item.td
+                            </td>
+                            <td>
+                                @item.No
+                            </td>
+                            <td>
+                                @item.RoutePrice
+                            </td>
+                            <td>
+                                @item.RouteName
+                            </td>
+                            <td>
+                                @item.TaxiNo
+                            </td>
+                            <td>
+                                @item.NumSeats
+                            </td>
+                            <td>
+                                @item.DriverName
+                            </td>
+                            <td>
+                                @item.LoadingTime
+                            </td>
+                            <td>
+                                @item.DepertureTime
+                            </td>
+
+                            <td>
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Reserve" class="btn btn-default" /> |
+                                    @Html.ActionLink("Back to List", "Index")
+                                </div>
+                            </td>
+                        </tr>
+
+                        }
+                    </table>
+                </div>
+            }
+        }
+
+
+    </div>
+            
+
+

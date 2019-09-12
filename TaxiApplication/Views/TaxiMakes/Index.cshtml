@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TaxiApplication.Data.TaxiMake>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="~/TaxiMakes/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+</p>
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+        <th>
+            Logo
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MakeType)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>           
+            <img src="@Url.Action("RenderImage", "TaxiMakes", new { id = item.MakeId})" width="50" height="60" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MakeType)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", "TaxiMakes", new { id = item.MakeId })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+            <a href="@Url.Action("Edit", "TaxiMakes", new { id = item.MakeId })   " rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Delete", "TaxiMakes", new { id = item.MakeId }) " rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+        </td>
+    </tr>
+    }
+
+</table>

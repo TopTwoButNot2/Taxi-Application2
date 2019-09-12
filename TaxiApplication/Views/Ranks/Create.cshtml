@@ -1,0 +1,62 @@
+﻿@model TaxiApplication.Data.Rank
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+    <h4>Add Rank</h4>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <label>Rank Name</label>
+    <input type="text" name="RankName" class="w3-border w3-padding" required placeholder="enter rank name" />
+    @Html.ValidationMessageFor(model => model.RankName, "", new { @class = "text-danger" })
+
+    <label>Province </label>
+    <input type="text" name="Province" class="w3-border w3-padding" required placeholder="enter province" />
+    @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+
+    <label>City </label>
+    <input type="text" name="City" class="w3-border w3-padding" required placeholder="enter City" />
+    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+    <label>Open Time </label>
+    <input type="time" name="OpenTime" class="w3-border w3-padding" required placeholder="Select Time" />
+    @Html.ValidationMessageFor(model => model.OpenTime, "", new { @class = "text-danger" })
+
+    <label>Close Time </label>
+    <input type="time" name="CloseTime" class="w3-border w3-padding" required placeholder="Select Time" />
+    @Html.ValidationMessageFor(model => model.CloseTime, "", new { @class = "text-danger" })
+
+    <label>Address or Location Name</label>
+    <input type="text" name="Location" class="w3-border w3-padding" required placeholder="enter location name" />
+    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+
+    <label>Latitude (optional)</label>
+    <input type="number" name="Lat" class="w3-border w3-padding" placeholder="enter longitude, e.g. -39.67543" />
+    @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
+
+    <label>Longitude (optional)</label>
+    <input type="number" name="Long" class="w3-border w3-padding" placeholder="enter longitude, e.g. 21.97564" />
+    @Html.ValidationMessageFor(model => model.Long, "", new { @class = "text-danger" })
+    <br /><br />
+
+    <span class="w3-left">
+        <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/Ranks/Index"> Back </a>
+    </span>
+
+    <span class="w3-right">
+        <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+    </span>
+    <br /><br />
+</div>
+}
+    

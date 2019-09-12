@@ -1,0 +1,132 @@
+﻿@model IEnumerable<TaxiApplication.Data.ReservedList>
+
+@{
+    ViewBag.Title = "ManagerIndex";
+    Layout = "~/Views/Shared/_RankManager.cshtml";
+}
+
+<h2>ManagerIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiMake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiModel)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReservedPassengers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoutePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSeats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnerTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiMake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxiModel)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.LoadingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepertureTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableSeats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservedPassengers)
+        </td>
+        
+    </tr>
+}
+
+</table>

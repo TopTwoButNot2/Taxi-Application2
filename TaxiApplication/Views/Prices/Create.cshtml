@@ -1,0 +1,69 @@
+﻿@model TaxiApplication.Data.Price
+@using TaxiApplication.BusinessLogics
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    BusinessLogic bl = new BusinessLogic();
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+    <h4>Add price</h4>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+         <tr>
+            <th>@Html.LabelFor(model => model.pricevalue)</th>
+            <td width="180px">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <b>R</b>
+                    </div>
+                    @Html.EditorFor(model => model.pricevalue, new { htmlAttributes = new { @class = "form-control", @placeholder = "0.00" } })
+                    @*<div class="input-group-addon">
+                        <b>.00</b>
+                    </div>*@
+                    @Html.ValidationMessageFor(model => model.pricevalue, "", new { @class = "text-danger" })
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th><label>Select Route</label></th>
+            <td>
+                @Html.DropDownList("RouteId", null, "--- Please Select Route---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RouteId, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <th> <label>Select Season</label></th>
+            <td>
+                @Html.DropDownList("SeasonID", null, "--- Please Select Season---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SeasonID, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <br />
+        <br />
+
+        <span class="w3-left">
+            <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/Prices/Index"> Back </a>
+        </span>
+
+        <span class="w3-right">
+            <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+        </span>
+        <br />
+        <br />
+ </div>
+}

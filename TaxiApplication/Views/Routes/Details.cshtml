@@ -1,0 +1,51 @@
+﻿@model TaxiApplication.Data.Route
+@{
+    ViewBag.Title = "Route Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+<h2 class="title text-center">@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-4">
+        <img src="data:image/png;base64,@Convert.ToBase64String(Model.picture, 0, Model.picture.Length)" style="width: 300px; height: 300px" alt="" />
+    </div>
+    <div class="col-md-6 pull-right">
+        <table class="table">
+            <tr>
+                <th>@Html.LabelFor(model => Model.RouteName))</th>
+                <td>
+                    @Html.DisplayFor(model => model.RouteName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.rankmanager.FirstName)</th>
+                <td>
+                    @Html.DisplayFor(model => model.rankmanager.FirstName)
+                </td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>
+                    @Html.DisplayFor(model => model.RouteName))
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => Model.RouteDistance)</th>
+            </tr>
+            <tr>
+                <td>
+                    <a class="btn btn-default" href="@Url.Action("Index","Routes")">
+                        <i class="fa fa-angle-left"></i>
+                        Back to List
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-default" href="@Url.Action("Edit","Routes", new { id = Model.RouteId })">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

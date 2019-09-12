@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TaxiApplication.Data.Laggage2>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.passenger.FirstName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.NumberLaggagSmall)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberLaggageMed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberLaggageLrg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.passenger.FirstName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberLaggagSmall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberLaggageMed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberLaggageLrg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

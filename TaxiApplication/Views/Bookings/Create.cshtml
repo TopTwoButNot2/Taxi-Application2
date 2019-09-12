@@ -1,0 +1,319 @@
+﻿@model TaxiApplication.Data.Booking
+@using TaxiApplication.Data;
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Create";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg)
+</script>
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Bookings", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Booking</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        <img src="@Url.Action("RenderImage", "TaxiHires", new { id = ViewBag.Id})" width="300" height="250"/>
+    </div>
+    <div class="form-group" style="margin-left">
+        @Html.LabelFor(model => model.PickUpDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="datepicker" value="date" class="form-control datepicker" name="PickUpDate" />
+            @*@Html.EditorFor(model => model.PickUpDate, new { htmlAttributes = new { @class = "form-control datepicker" } })*@
+            @Html.ValidationMessageFor(model => model.PickUpDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-left">
+        @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="datepicker2" value="date" class="form-control datepicker" name="ReturnDate" />
+            @*@Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control datepicker" } })*@
+            @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <h3> Route Name </h3>          <div class="col-md-10">
+            @Html.EditorFor(model => model.RouteName, new { htmlAttributes = new { @class = "form-control", id = "travelto" } })
+            @Html.ValidationMessageFor(model => model.RouteName, "", new { @class = "text-danger" })
+            <br />
+            <input type="button" value="Show Distance" id="addbtn" onclick="PushDestination()" />
+        </div>
+    </div>
+    <div style="display:none" id="routeinfo">
+        <div class="form-group">
+            <h3> Route Distance </h3>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RouteDistance, new { htmlAttributes = new { @class = "form-control", id = "dis", @readonly = "readonly", required = "required" } })
+                @*@Html.ValidationMessageFor(model => model.RouteDistance, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.vehicleID, "vehicleID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="hidden" readonly value="@ViewBag.Id" class="form-control" name="vehicleID" />
+                @Html.ValidationMessageFor(model => model.vehicleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Select Extras
+            </label>
+            <div class="col-md-10">
+                <table class="table">
+                    @foreach (var item in db.Extras)
+                    {
+
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="@item.ExtraType" name="selected_extras" value="@item.ExtraType" class="chkclass">
+                                <label for="@item.ExtraType"> @item.ExtraType -  </label>
+                            </td>
+                            <td class="sum wagein">
+                                @item.ExtraPrice
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+                <div class="row">
+                    Total p/d:  <h3 id="sum"></h3><br />
+                    @Html.HiddenFor(model => model.ExtraPrice)
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hire Taxi" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    }
+    <link href="~/Content/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" />
+    @section Scripts {
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />>
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $(function () {
+                $(".datepicker").datepicker({
+                    dateFormat: "dd - MM - yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: ":",
+                    minDate: 0,
+                    maxDate: '+1M',
+                    showButtonPanel: true
+                })
+            });
+        </script>
+
+        @*<script>
+                $('.chkclass').click(function () {
+                    var sum = 0;
+                    var total_sum = 0;
+                    $('.chkclass:checked').each(function () {
+                        sum += parseFloat($(this).closest('tr').find('.wagein').text());
+                    });
+                    $('#sum').html(sum);
+                    total_sum = sum;
+                    $('#ExtraPrice').val(sum);
+                    return sum
+                });
+            </script>*@
+    }
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                types: ['(cities)'],
+                componentRestrictions: { country: "ZA" }
+            };
+
+            var input = document.getElementById('RouteName');
+
+            var places = new google.maps.places.Autocomplete(input, options);
+
+
+        });
+    </script>
+    <script type="text/javascript">
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                types: ['(cities)'],
+                componentRestrictions: { country: "ZA" }
+            };
+
+            var input = document.getElementById('StopOver');
+
+            var places = new google.maps.places.Autocomplete(input, options);
+
+
+        });
+    </script>
+
+    <div class="row" style="display:none">
+        <div class="form-horizontal modal-content" style="margin-top:2%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px;margin-left:60%">
+
+            <div> Add Destination</div>
+            <div>
+                <input type="text" name="name" value="Oving, UK" />
+                <input type="button" value="Add" onclick="PushDestination()" />
+
+            </div>
+            <div id="destinations"></div><br />
+            Source : <input id="travelfrom" type="text" name="name" value="Durban, South Africa" />   <br />  <br />
+
+
+            <input type="button" value="Calculate" onclick="GetRoute()" />
+            <p></p>
+            <br />
+            <div id="dvDistance">
+                <table id="tblResults" border="1" cellpadding="10">
+                    <tr>
+                        <th> Source </th>
+                        <th> Destination </th>
+                        <th> Distance </th>
+                        <th> Duration </th>
+                    </tr>
+                </table>
+
+            </div>
+
+            <p></p>
+
+            <div id="dvMap" style="min-height:500px"></div>
+
+        </div>
+    </div>
+
+    <!--ENSURE YOU CHANGE TO YOUR OWN API KEY HERE !!! -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0" type="text/javascript"></script>
+
+    <!-- code for example 1 -->
+    <script>
+
+        var source, destination;
+        var locations = [];
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+
+        // initialise the location of the map on Chichester in England (ref lat and lng)
+        var map = new google.maps.Map(document.getElementById('dvMap'), {
+            center: { lat: 50.834697, lng: -0.773792 },
+            zoom: 13,
+            mapTypeId: 'roadmap'
+        });
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            new google.maps.places.SearchBox(document.getElementById('travelfrom'));
+            new google.maps.places.SearchBox(document.getElementById('travelto'));
+            directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+        });
+
+        function PushDestination() {
+            destination = document.getElementById("travelto").value;
+            locations.push(destination);
+            document.getElementById("routeinfo").style.display = "inline-block";
+            document.getElementById("addbtn").style.display = "none";
+            destinationArray = document.getElementById("destinations");
+            destinationArray.innerHTML += destination + "<br />";
+            GetRoute();
+        }
+
+        function setDestination(dest) {
+            document.getElementById('travelto').value = dest;
+            PushDestination();
+        }
+
+
+        function GetRoute() {
+
+            directionsDisplay.setMap(map);
+
+            source = document.getElementById("travelfrom").value;
+            destination = document.getElementById("travelto").value;
+
+            var waypoints = [];
+            for (var i = 0; i < locations.length; i++) {
+                var address = locations[i];
+                if (address !== "") {
+                    waypoints.push({
+                        location: address,
+                        stopover: true
+                    });
+                }
+            }
+
+            var request = {
+                origin: source,
+                destination: waypoints[0].location,
+                waypoints: waypoints, //an array of waypoints
+                optimizeWaypoints: true, //set to true if you want google to determine the shortest route or false to use the order specified.
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            };
+
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    var dvDistance = document.getElementById("dvDistance");
+                    var distance = 0;
+                    var minute = 0.00;
+                    response.routes[0].legs.forEach(function (item, index) {
+                        if (index < response.routes[0].legs.length - 1) {
+                            distance = distance + parseInt(item.distance.text);
+                            document.getElementById("dis").value = distance;
+                            minute = parseFloat(minute) + parseFloat(item.duration.value / 60);
+                            document.getElementById("time").value = minute;
+
+                            tbl = document.getElementById("tblResults");
+                            var row = tbl.insertRow(1);
+                            var cell = row.insertCell(0);
+                            cell.innerText = source;
+                            var cell = row.insertCell(1);
+                            cell.innerText = item.end_address;
+                            var cell = row.insertCell(2);
+                            cell.innerText = distance;
+                            var cell = row.insertCell(3);
+                            cell.innerText = minute.toFixed(2) + " min";
+                        }
+                    });
+                    directionsDisplay.setDirections(response);
+                }
+                else {
+                    //handle error
+                }
+            })
+        };
+
+    </script>
+    <!-- end code for example 1 -->
+

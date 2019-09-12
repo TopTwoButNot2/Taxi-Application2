@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @using TaxiApplication.BusinessLogics
+    @{
+        BusinessLogic bl = new BusinessLogic();
+    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Application - Owner</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="~/Content/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    @*<link href="~/Content/assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />*@
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/main-style.css" rel="stylesheet" />
+    <!-- Page-Level CSS -->
+    <link href="~/Content/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="~/Content/css/w3.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        /* Create two equal columns that sits next to each other */
+        .column {
+            flex: 50%;
+            padding: 10px;
+            height: 300px;
+            margin-right: -60%; /* Should be removed. Only for demonstration */
+        }
+
+        .column2 {
+            flex: 50%;
+            padding: 10px;
+            height: 300px;
+            width: 25%; /* Should be removed. Only for demonstration */
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            height: 30px;
+        }
+
+        input[type=number] {
+            width: 100%;
+            height: 30px;
+        }
+
+        input[type=email] {
+            width: 100%;
+            height: 30px;
+        }
+
+        #listheader {
+            margin-top: 60px;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" style="height:40px;background:#428bca">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="index.html">
+                        <img src="~/Content/assets/img/logo.png" alt="" />
+                    </a>*@
+            </div>
+            <!-- end navbar-header -->
+            <!-- navbar-top-links -->
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- main dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="top-label label label-danger">3</span><i class="fa fa-envelope fa-2x"></i>
+                    </a>
+                    <!-- dropdown-messages -->
+                    @*<ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong><span class=" label label-danger">Andrew Smith</span></strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong><span class=" label label-info">Jonney Depp</span></strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong><span class=" label label-success">Jonney Depp</span></strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end dropdown-messages -->
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="top-label label label-success">4</span>  <i class="fa fa-tasks fa-2x"></i>
+                    </a>
+                    <!-- dropdown tasks -->
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end dropdown-tasks -->
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="top-label label label-warning">5</span>  <i class="fa fa-bell fa-2x"></i>
+                    </a>
+                    <!-- dropdown alerts-->
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i>New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i>3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i>Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i>New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i>Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end dropdown-alerts -->
+                </li>*@
+
+                <li class="dropdown">
+                    @{
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">
+                                <i class="fa fa-sign-out fa-2x" style="margin-top:-25px;color:white"></i>
+                            </a>
+                        </li>
+                    }
+                    }
+
+                    <!-- end dropdown-user -->
+                    <!-- end main dropdown -->
+                </ul>
+                <!-- end navbar-top-links -->
+
+            </nav>
+
+            <div class="row">
+                <div class="column">
+                    <nav class="navbar-default navbar-static-side" role="navigation" style="margin-top:30px;">
+                        <!-- sidebar-collapse -->
+                        <div class="sidebar-collapse">
+                            <!-- side-menu -->
+                            <ul class="nav" id="side-menu" style="background:#428bca">
+                                <li>
+                                    <!-- user image section-->
+                                    <div class="user-section" style="background:#555555">
+                                        <div class="user-section-inner">
+                                            <img src="@Url.Action("UserPhotos", "Home" )" class="img-circle" alt="User Image">
+                                        </div>
+                                        <div class="user-info">
+                                            <div style="color:white">@bl.Owner(User.Identity.Name)</div>
+                                            <div class="user-text-online">
+                                                <span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Online
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end user image section-->
+                                </li>
+                                @*<li class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search..." style="width:100%">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </li>*@
+                                <li class="selected">
+                                    <a href="~/Home/LandingPage"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="~/Home/LandingPage"><i class="fa fa-home fa-fw"></i> Home Page</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+
+                                        <li>
+                                            <a href="~/Drivers/Index"> Drivers</a>
+
+                                        </li>
+
+                                    </ul>
+                                    <!-- second-level-items -->
+                                </li>
+
+                                <li>
+                                    <a href="#"><i class="fa fa-users fa-fw"></i> Taxis<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="~/Taxis/Index">Taxi</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/TaxiDrivers/Index">Taxi Drivers</a>
+                                        </li>
+                                    </ul>
+                                    @*second-level-items*@
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-users fa-fw"></i> Taxis Hire<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+
+                                            <a href="~/Insurances/Index"><i class="fa fa-tasks fa-fw"></i>Insurances</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="~/Extras/Index"><i class="fa fa-tasks fa-fw"></i>Extras</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="~/Fuels/Index"><i class="fa fa-tasks fa-fw"></i>Fuels</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="~/Transmissions/Index"><i class="fa fa-tasks fa-fw"></i>Transmissions</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="~/TaxiHires/Index"><i class="fa fa-tasks fa-fw"></i>Taxi Hire</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="~/Bookings/Index"><i class="fa fa-tasks fa-fw"></i>Booking Details</a>
+                                        </li>
+                                    </ul>
+                                    @*second-level-items*@
+                                </li>
+                               
+                                <li>
+                                    <a href="~/TaxiPositions/Create"><i class="fa fa-tasks fa-fw"></i>Update Schedule</a>
+                                </li>
+
+                                <li>
+
+                                    <a href="~/ReservedPassengers/OwnerIndex"><i class="fa fa-tasks fa-fw"></i>View Report</a>
+                                </li>
+                              
+                            <!-- end side-menu -->
+                        </div>
+                        <!-- end sidebar-collapse -->
+                    </nav>
+                </div>
+                <div class="column2">
+                    <div>
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+<script src="~/Content/assets/plugins/jquery-1.10.2.js"></script>
+<script src="~/Content/assets/plugins/jquery-1.10.2.js"></script>
+        <script src="~/Content/assets/plugins/bootstrap/bootstrap.min.js"></script>
+        <script src="~/Content/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="~/Content/assets/plugins/pace/pace.js"></script>
+        <script src="~/Content/assets/scripts/siminta.js"></script>
+        <!-- Page-Level Plugin Scripts-->
+        <script src="~/Content/assets/plugins/morris/raphael-2.1.0.min.js"></script>
+        <script src="~/Content/assets/plugins/morris/morris.js"></script>
+        <script src="~/Content/assets/scripts/dashboard-demo.js"></script>
+
+    </body>
+</html>

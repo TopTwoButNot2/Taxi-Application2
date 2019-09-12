@@ -1,0 +1,35 @@
+﻿@model TaxiApplication.Data.ReservedPassengers
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Passenger.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReservedPassengers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Passenger.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passenger.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiPosition.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiPosition.OwnerID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ResPasID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

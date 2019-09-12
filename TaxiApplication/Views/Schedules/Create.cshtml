@@ -1,0 +1,78 @@
+﻿@model TaxiApplication.Data.Schedule
+@using TaxiApplication.Models
+@using TaxiApplication.BusinessLogics
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ScheduleDateLogics l = new ScheduleDateLogics();
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal modal-content" style="margin-top:5%;width:45%;padding-left:30px;padding-right:30px;margin-bottom:50px">
+
+    <h4>Schedule</h4>
+
+    <label>Select Owner</label>
+    @Html.DropDownList("ownerID", null, htmlAttributes: new { @class = "w3-border w3-padding", style = "width:100%" })
+    @Html.ValidationMessageFor(model => model.ownerID, "", new { @class = "text-danger" })
+
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoadingTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LoadingTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LoadingTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DepertureTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DepertureTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DepertureTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <label>Select Schedule date</label>
+    <select name="id">
+        @{
+
+            foreach (var x in l.GetScheduleDates())
+            {
+                <option value="@x.id">@x.DateFrom - @x.DateTo</option>
+            }
+        }
+    </select>
+
+    @*<label>Select RankId</label>
+        @Html.DropDownList("RankId", null, htmlAttributes: new { @class = "w3-border w3-padding", style = "width:100%" })
+        @Html.ValidationMessageFor(model => model.RankId, "", new { @class = "text-danger" })*@
+    <hr />
+
+    <label>Select Route</label>
+    @Html.DropDownList("RouteId", null, htmlAttributes: new { @class = "w3-border w3-padding", style = "width:100%" })
+    @Html.ValidationMessageFor(model => model.RouteId, "", new { @class = "text-danger" })
+
+    <br />
+
+    <span class="w3-left">
+        <a class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white" href="~/Schedules/Index"> Back </a>
+    </span>
+
+    <span class="w3-right">
+        <button class="w3-button" type="submit" style="margin-top:5px;background-color:#f0ad4e;color:white"> Save </button>
+    </span>
+    <br />
+    <br />
+    <br />
+</div>
+}
+

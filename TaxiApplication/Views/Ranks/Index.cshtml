@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TaxiApplication.Data.Rank>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+
+<div id="listheader">
+    <p>
+        <a href="~/Ranks/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+    </p>
+    
+    </div>
+
+<p>Taxi Ranks - @TempData["count"] Records</p>
+
+    <table class="table table-bordered table-striped" style="width:80%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RankName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Long)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Province)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CloseTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RankName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Long)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CloseTime)
+            </td>
+            <td>
+                <a href="@Url.Action("Details","Ranks", new { id=item.RankId })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                <a href="@Url.Action("Edit","Ranks", new { id=item.RankId })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Delete", "Ranks", new { id = item.RankId })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+            </td>
+        </tr>
+        }
+
+    </table>

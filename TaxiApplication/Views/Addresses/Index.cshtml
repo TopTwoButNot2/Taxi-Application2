@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TaxiApplication.Data.Address>
+
+@{
+< a href = "~/Views/Addresses/Index.cshtml" > ~/ Views / Addresses / Index.cshtml </ a >
+     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateUpdated)
+            </td>
+            <td>
+                <a href="@Url.Action("Details","Addresses", new { id=item.AddressID })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                <a href="@Url.Action("Edit","Addresses", new { id=item.AddressID })" rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Delete", "Addresses", new { id = item.AddressID })" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>YMCA</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="~/assets/plugins/smallipop/css/contrib/animate.min.css" type="text/css" media="all" title="Screen" />
+    <link rel="stylesheet" href="~/assets/plugins/smallipop/css/jquery.smallipop.css" type="text/css" media="all" title="Screen" />
+
+    <link rel="stylesheet" href="~/assets/css/normalize.css" />
+    <link rel="stylesheet" href="~/assets/css/foundation.css" />
+    <link rel="stylesheet" href="~/assets/css/fgx-foundation.css" />
+
+
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/nivo-slider.css" />
+    <link rel="stylesheet" href="~/assets/css/themes/default/default.css" />
+    <link rel="stylesheet" href="~/assets/css/datepicker/metallic.css" />
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/assets/css/style.css" />
+
+    <script src="~/assets/js/vendor/jquery.js"></script>
+    <script src="~/assets/js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body class="boxed">
+
+    <div class="main-wrapper">
+
+        <header class="row main-navigation">
+            <div class="large-3 columns">
+                <a href="index-2.html" id="logo"><img src="~/assets/images/loo.png" alt="YMCA" /></a>
+            </div>
+            <div class="large-9 columns">
+                <nav class="top-bar">
+                    <ul class="title-area">
+
+                        <li class="name"></li>
+
+                        <li class="toggle-topbar menu-icon"><a href="#"><span>Main Menu</span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+
+                        <ul class="right">
+                            <li><a href="~/Home/LandingPage">Home</a></li>
+                            <li><a href="~/TaxiPositions/ListofTaxisForPassenger">Reserve Space</a></li>
+                            <li><a href="~/TaxiHires/BookVehicle">Taxi Hire</a></li>
+                            <li><a href="~/Laggages/Index">View Rank</a></li>
+                            <li><a href="~/Passerngers/Index">Update my Details</a></li>
+
+                            <li><a href="~/Home/About">About Us</a></li>
+                            <li><a href="~/Home/About">Sign Out</a></li>
+
+                            @*<li><a href="Login.php">Login</a></li>
+        <li><a href="contact.html">Contact</a></li>*@
+                        </ul>
+                        </li>
+
+                    </section>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            @RenderBody()
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    @*<footer class="footer_wrapper" style="position:fixed;left:0;width:100%;bottom:0">
+
+        <div class="privacy footer_bottom position-static">
+            <div class="footer-part">
+                <div class="row">
+                    <div class="large-10 columns copyright">
+                        <p>&copy; 2019 TopTwoButNot2, All Rights Reserved.</p>
+                    </div>
+                    <div class="large-2 columns">
+                        <div id="back-to-top"><a href="#top"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>*@
+    <style>
+        .footer {
+            position:unset;
+            left: 0;
+            bottom:auto;
+            width:100%;
+        }
+    </style>
+    <script src="~/assets/js/foundation.min.js"></script>
+    <script>$(document).foundation()</script>
+
+    <script src="~/assets/plugins/carouFredSel/jquery.carouFredSel-6.2.0-packed.js"></script>
+    <script src="~/assets/plugins/carouFredSel/helper-plugins/jquery.touchSwipe.min.js"></script>
+
+    <script type="text/javascript" src="~/assets/js/app-head-calls.js"></script>
+    <script type="text/javascript" src="~/assets/js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="~/assets/js/datepicker.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/smallipop/lib/contrib/prettify.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/smallipop/lib/jquery.smallipop.js"></script>
+    <script>
+        jQuery.noConflict();
+
+        jQuery(window).load(function () {
+            jQuery('#slider').nivoSlider({ controlNav: false });
+        });
+        jQuery(document).ready(function () {
+            jQuery('input.datepicker').Zebra_DatePicker();
+
+            jQuery("#carousel-type1").carouFredSel({
+                responsive: true,
+                width: '100%',
+                auto: false,
+                circular: false,
+                infinite: false,
+                items: {
+                    visible: { min: 1, max: 4 },
+                },
+                scroll: {
+                    items: 1,
+                    pauseOnHover: true
+                },
+                prev: {
+                    button: "#prev2",
+                    key: "left"
+                },
+                next: {
+                    button: "#next2",
+                    key: "right"
+                },
+                swipe: true
+            });
+
+            jQuery(".work_slide ul").carouFredSel({
+                circular: false,
+                infinite: true,
+                auto: false,
+                scroll: { items: 1 },
+                items: { visible: { min: 3, max: 3 } },
+                prev: { button: "#slide_prev", key: "left" },
+                next: { button: "#slide_next", key: "right" }
+            });
+            jQuery("#testimonial_slide").carouFredSel({
+                circular: false,
+                infinite: true,
+                auto: false,
+                scroll: { items: 1 },
+                prev: { button: "#slide_prev1", key: "left" },
+                next: { button: "#slide_next1", key: "right" }
+            });
+
+
+        });
+
+    </script>
+    <script src="~/assets/js/app-bottom-calls.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>

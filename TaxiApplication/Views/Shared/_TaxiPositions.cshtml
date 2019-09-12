@@ -1,0 +1,116 @@
+﻿@model TaxiApplication.Data.GridPagination
+@{
+    int count = ((Model.CurrentPage - 1) * Model.TakeCount) + 1; // This is the serial number Calculation
+    int TotalCounter = 0;
+    bool showFooter = true;
+
+    // We will show only 5 buttons on footer to paginate
+    // Because if the data is more then it will look worst with multiple buttons in footer
+    int StartButton = 1;
+    // Checking if total page is greate then 5 else we will take upto
+    // whatever the total page is
+    double EndButton = 5 > Model.TotalPage ? Model.TotalPage : 5;
+}
+
+<table class="table table-bordered">
+    <thead>
+        @*Setting the filter values in text boxes*@
+        <tr>
+            <th>Sr No.</th>
+            <th>Position <input type="text" id="emp_no" class="form-control col-md-2 filter-text" value="@Model.filters.schedule.Position" /></th>
+            <th>Taxi No <input type="text" id="TaxiNo" class="form-control col-md-2 filter-text" value="@Model.filters.TaxiNo" /></th>
+            <th>Driver Name <input type="text" id="DriverName" class="form-control col-md-2 filter-text" value="@Model.filters.DriverName" /></th>
+            <th>Route Name <input type="text" id="RouteName" class="form-control col-md-2 filter-text" value="@Model.filters.RouteName" /></th>
+            <th>Loading Time<input type="text" id="LoadingTime" class="form-control col-md-2 filter-text" value="@Model.filters.LoadingTime" /></th>
+            <th>Departure Time <input type="text" id="DepartureTime" class="form-control col-md-2 filter-text" value="@Model.filters.DepertureTime" /></th>
+            <th>Route Price<input type="text" id="RoutePrice" class="form-control col-md-2 filter-text" value="@Model.filters.RoutePrice" /></th>
+            <th>Number of Seats <input type="text" id="NumSeats" class="form-control col-md-2 filter-text" value="@Model.filters.NumSeats" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Data != null && Model.Data.Count > 0)
+        {
+            foreach (var emp in Model.Data)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>@emp.schedule.Position</td>
+                    <td>@emp.TaxiNo</td>
+                    <td>@emp.DriverName</td>
+                    <td>@emp.RouteName</td>
+                    <td>@emp.LoadingTime</td>
+                    <td>@emp.DepertureTime</td>
+                    <td>@emp.RoutePrice</td>
+                    <td>@emp.NumSeats</td>
+                </tr>
+                count++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" style="text-align: center;">No taxi positions found</td>
+            </tr>
+            showFooter = false;
+        }
+    </tbody>
+</table>
+
+@*This is the calculation done for showing the buttons like next, prev, jump forward, jump backward etc*@
+@*Jump previous will shift from current page to 2 page backward*@
+@*e.g. if you are on the 5th page, then clicking on jump backward will shift to the 2nd page*@
+@*Similarly jump forward will shift 2 page forward*@
+@if (showFooter)
+{
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col col-xs-4">
+                Page @Model.CurrentPage of @Model.TotalPage |
+                Total @Model.TotalData Records
+            </div>
+            <div class="col col-xs-8">
+                <ul class="pagination hidden-xs pull-right">
+                    @*if current page is 1 then there is no need of showing previous and jump backward buttons*@
+                    @if (Model.CurrentPage != 1)
+                    {
+                        //Prevoius button
+                        <li><a href="javascript:void(0);" data-page="@(Model.CurrentPage - 1)" class="@(Model.CurrentPage == 1 ? "" : "filter-page")">Prev</a></li>
+
+
+                        //Start button and jump backward button's calculation
+                        StartButton = Model.CurrentPage - 2 <= 0 ? 1 : Model.CurrentPage - 2;
+                        EndButton = Model.CurrentPage + 2 > Model.TotalPage ? Model.TotalPage : Model.CurrentPage + 2;
+                        if (Model.CurrentPage == Model.TotalPage)
+                        {
+                            StartButton = StartButton - 2 <= 0 ? 1 : StartButton - 2;
+                        }
+
+                        //Jump backward button
+                        if (Model.CurrentPage >= 4)
+                        {
+                            <li><a href="javascript:void(0);" class="filter-page" data-page="@(StartButton - 1 <= 0 ? 1 : StartButton - 1)"><span><<</span></a></li>
+                        }
+                    }
+
+                    @*Five buttons*@
+                    @for (int i = StartButton; i <= EndButton; i++)
+                    {
+                        <li><a href="javascript:void(0);" class="@(Model.CurrentPage == i ? "active page" : "filter-page")" data-page="@i">@i</a></li>
+                    }
+
+                    @* Jump forward button calculation *@
+                    @if (EndButton != Model.TotalPage)
+                    {
+                        <li><a href="javascript:void(0);" class="filter-page" data-page="@(EndButton+1>Model.TotalPage?Model.TotalPage:EndButton+1)"><span>>></span></a></li>
+                    }
+
+                    @* next button *@
+                    @if (Model.CurrentPage != Model.TotalPage && Model.TotalPage > 1)
+                    {
+                        <li><a href="javascript:void(0);" data-page="@(Model.CurrentPage + 1)" class="@(Model.CurrentPage == TotalCounter ? "" : "filter-page")">Next</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}

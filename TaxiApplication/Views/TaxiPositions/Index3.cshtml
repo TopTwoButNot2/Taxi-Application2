@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<TaxiApplication.Data.GridPagination>
+
+
+@{
+    ViewBag.Title = "Create";
+    if (User.IsInRole("Owner"))
+    {
+        Layout = "~/Views/Shared/_Owner.cshtml";
+
+    }
+    else if (User.IsInRole("RankManager"))
+    {
+        Layout = "~/Views/Shared/_RankManager.cshtml";
+
+    }
+
+}
+
+<br />
+<h2>Index</h2>
+
+<style>
+    .panel-table .panel-footer .pagination {
+        margin: 0;
+    }
+
+    /*
+    used to vertically center elements, may need modification if you're not using default sizes.
+    */
+    .panel-table .panel-footer .col {
+        line-height: 34px;
+        height: 34px;
+    }
+
+    .active.page {
+        background-color: blue;
+        color: white;
+    }
+</style>
+<div class="container" id="tbEmployee">
+    @{ Html.RenderPartial("_EmployeeList", Model);}
+</div>  

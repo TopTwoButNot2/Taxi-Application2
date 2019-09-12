@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TaxiApplication.Data.TaxiModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Index</h2>
+
+<div id="listheader">
+    <p>
+        <a href="~/TaxiModels/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+    </p>
+
+</div>
+<table class="table table-bordered table-striped" style="width:80%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.taxiMake.MakeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxiModelName)
+        </th>
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.taxiMake.MakeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxiModelName)
+            </td>
+       
+            <td>
+                <a href="@Url.Action("Details", "TaxiModels", new { id = item.TaxiModelID })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                <a href="@Url.Action("Edit", "TaxiModels", new { id = item.TaxiModelID })   " rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Delete", "TaxiModels", new { id = item.TaxiModelID }) " rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,145 @@
+﻿
+@model PagedList.IPagedList<TaxiApplication.Data.Route>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+<head>
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Poiret+One&amp;subset=cyrillic,latin-ext" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //web font -->
+</head>
+<style>
+
+    h4 {
+        color: #fff;
+    }
+</style>
+<h2>Index</h2>
+
+<p>
+    <a href="~/Routes/Create" class="w3-button" style="background-color:#f0ad4e;color:white">Add New</a>
+</p>
+<body>
+    <p>Taxi Routes - @TempData["count"] Records</p>
+    @*@using (Html.BeginForm("Index", "Routes", FormMethod.Get))
+    {
+        <p> Search by Route: @Html.TextBox("searchString") <input type="submit" value="Search" /></p>
+    }*@
+    @using (Html.BeginForm("Index", "Routes", FormMethod.Get))
+    {
+        <table class="table table-bordered table-striped" style="width:80%">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().Rank.RankName)*@
+                    RankName
+                </th>
+                <th>
+                    Route Image
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().rankmanager.FirstName)*@
+                    FirstName
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().RouteName)*@
+                    RouteName
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().RouteDistance)*@
+                    Stop Over
+                </th>
+                <th>
+                    Route Distance
+                </th>
+                <th>
+                    Route Duration
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rank.RankName)
+                </td>
+                <td>
+                    @*<a href="@Url.Action("Details", "VehicleMakes", new { id = item.vMakeID })" title="View Details" , rel="nofollow">
+            <img src="data:image/png;base64,
+                 @Convert.ToBase64String(item.Image, 0, item.Image.Length)" style="width: 60px; height: 60px" alt="" />
+        </a>*@
+                    <img src="@Url.Action("RenderImage", "Routes", new { id = item.RouteId})" width="50" height="60" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rankmanager.FirstName)
+                </td>ss
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StopOver)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteDuration)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "Routes", new { id = item.RouteId })" rel="tooltip" title="View" class="btn btn-info btn-simple btn-xs"><i class="fa fa-eye"></i></a>
+                    <a href="@Url.Action("Edit", "Routes", new { id = item.RouteId })   " rel="tooltip" title="Edit" class="btn btn-success btn-simple btn-xs"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Delete", "Routes", new { id = item.RouteId }) " rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            }
+
+        </table>
+        <br />
+    }
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model,
+    page => Url.Action("Index",
+    new
+    {
+    page,
+    searchStringUserNameOrEmail = ViewBag.searchStringUserNameOrEmail,
+    currentFilter = ViewBag.CurrentFilter
+    }))
+    <hr />
+</body>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0" type="text/javascript"></script>
+
+
+        <script type="text/javascript">
+
+            google.maps.event.addDomListener(window, 'load', function () {
+                var options = {
+                    types: ['(cities)'],
+                    componentRestrictions: { country: "ZA" }
+                };
+
+                var input = document.getElementById('searchString');
+                var places = new google.maps.places.Autocomplete(input, options);
+
+
+            });
+        </script>
+
+    }
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmhXQ1stYNTSUpkxfsymg_0BjeMkEbM-IY&callback=initMap"
+                type="text/javascript"></script>

@@ -1,0 +1,43 @@
+﻿@model TaxiApplication.Data.TaxiMake
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TaxiMake</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MakeType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakeType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MakeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

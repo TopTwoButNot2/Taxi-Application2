@@ -1,0 +1,88 @@
+﻿@model TaxiApplication.Data.RouteViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RouteViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RankName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RankName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pricevalue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pricevalue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StopOvers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StopOvers)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

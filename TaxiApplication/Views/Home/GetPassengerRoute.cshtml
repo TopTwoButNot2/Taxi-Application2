@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetPassengerRoute</title>
+    @using TaxiApplication.BusinessLogics
+    @{
+        //        Layout = "~/Views/Shared/_Passenger.cshtml";
+        BusinessLogic bl = new BusinessLogic();
+        var message = TempData["AlertMessage"] ?? string.Empty;
+        Layout = "~/Views/Shared/_Passenger.cshtml";
+
+    }
+    <script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+    </script>
+</head>
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    
+    <style>
+
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')"> Reservation</button>
+        @*<button class="tablinks" onclick="openCity(event, 'Paris')">My Reservations</button>*@
+    </div>
+
+    <div id="London" class="tabcontent" style="display:block">
+
+    <body>
+
+    <label>Route Details</label>
+    <br />
+    <table class="table table-bordered table-striped" style="width:80%">
+        <tr>
+            <th>
+                @Html.DisplayName("Route")
+            </th>
+            <th>
+                @Html.DisplayName("First Name")
+            </th>
+            <th>
+                @Html.DisplayName("Phone Number")
+            </th>
+            <th>
+                @Html.DisplayName("Taxi Reg No")
+            </th>
+            <th>
+                @Html.DisplayName("Taxi Make")
+            </th>
+            <th>
+                @Html.DisplayName("Available Seats")
+            </th>
+            <th>
+                @Html.DisplayName("Route Price")
+            </th>
+            <th>
+            </th>
+
+        </tr>
+        @foreach (var a in bl.passengerAvail(Convert.ToInt16(Session["rid"])))
+        {
+            <tr>
+                <td>@a.schedule.route.RouteName</td>
+                <td>@a.TaxiDriver.driver.FirstName</td>
+                <td>@a.TaxiDriver.driver.PhoneNumber</td>
+                <td>@a.TaxiDriver.taxi.TaxiNo</td>
+                <td>@a.TaxiDriver.taxi.TaxiMake.MakeType</td>
+                <td>@a.TaxiDriver.SelectSeats()</td>
+                <td>@a.schedule.RoutePrice</td>
+
+                <td>
+                    <a href="@Url.Action("Reserve", "Availables"@*, new { id = a.ID }*@)" rel="tooltip" class="btn btn-success "><i class="fa fa-times"> Reserve</i></a>
+                </td>
+
+            </tr>
+        }
+  
+    </table>
+    </body>
+    </div>
+
+</html>

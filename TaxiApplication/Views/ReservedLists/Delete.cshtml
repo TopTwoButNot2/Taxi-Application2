@@ -1,0 +1,84 @@
+﻿@model TaxiApplication.Data.ReservedList
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ReservedList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+   
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoutePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoutePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumSeats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumSeats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoadingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoadingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepertureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepertureTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

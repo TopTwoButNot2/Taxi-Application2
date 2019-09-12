@@ -1,0 +1,255 @@
+﻿@model TaxiApplication.Data.TaxiHire
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Owner.cshtml";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm(actionName: "Create", controllerName: "TaxiHires", routeValues: null, method: FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Add Taxi</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.MakeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (ViewBag.MakeList != null)
+                    {
+                        @Html.DropDownListFor(model => model.MakeId, ViewBag.MakeList as SelectList, "--Select Make--", new { @class = "form-control" })
+                    }
+                    @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TaxiModelID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.TaxiModelID, new SelectList(" "), "--Select Model--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TaxiModelID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th> @Html.LabelFor(model => model.MakeId, "MakeId", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                @Html.DropDownList("MakeId", null, "--- Please Select ---", new { @class = "form-control" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> @Html.LabelFor(model => model.TaxiModelID, "TaxiModelID", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                @Html.DropDownList("TaxiModelID", null, "--- Please Select ---", new { @class = "form-control" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TaxiModelID, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.Cost_Per_Day)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.Cost_Per_Day, new { @class = "form-control", @placeholder = "Cost per day" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.Cost_Per_Day, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.BasicPrice)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.BasicPrice, new { @class = "form-control", @placeholder = "Cost per day" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.BasicPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <th>@Html.LabelFor(m => m.desciption)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.desciption, new { @class = "form-control", @placeholder = "Description" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.desciption, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.seasts)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.seasts, new { @class = "form-control", @placeholder = "Number of Seats" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.seasts, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th width="180px">@Html.LabelFor(m => m.KiloRate)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-at"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.KiloRate, new { @class = "form-control", @placeholder = "Kilometer Rate" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.KiloRate, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> @Html.LabelFor(model => model.transID, "transID", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                @Html.DropDownList("transID", null, "--- Please Select ---", new { @class = "form-control" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.transID, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> @Html.LabelFor(model => model.FuelID, "FuelID", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                @Html.DropDownList("FuelID", null, htmlAttributes: new { @class = "form-control" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.FuelID, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.CurrentMilage)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.CurrentMilage, new { @class = "form-control", @placeholder = "Current millage" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.CurrentMilage, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> @Html.LabelFor(model => model.InsuranceId, "InsuranceId", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                @Html.DropDownList("InsuranceId", null, "--- Please Select ---", new { @class = "form-control" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.InsuranceId, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(model => model.Image)</th>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-file-picture-o"></i>
+                                </div>
+                                <input type="file" name="file" value="Upload File" />
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="btn btn-default" href="@Url.Action("Index","TaxiHires")">
+                                <i class="fa fa-angle-left"></i>
+                                Back to List
+                            </a>
+                        </td>
+                        <td class="pull-right">
+                            <input type="submit" value="Create New" class="btn btn-default" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <img id="image_preview" src="#" alt="" @*style="border: 5px solid #ccc"*@ />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    //image preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_preview')
+                    .attr('src', e.target.result)
+                    .width(300)
+                    .height(300);
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#MakeId").change(function () {
+            $.get("/Vehicles/GetModelList", { MakeId: $("#MakeId").val() }, function (data) {
+                $("#TaxiModelID").empty();
+                $.each(data, function (index, row) {
+                    $("#TaxiModelID").append("<option value= '" + row.TaxiModelID + "'>" + row.vModelName + "</option>")
+                });
+            });
+        })
+    });
+</script>
